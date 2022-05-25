@@ -14,7 +14,7 @@ export const PoolBox = ({poolId, extra}) => {
 
   const { data: pool, isFetching: poolIsFetching, isSuccess: poolIsSuccess } = useGetPoolQuery(poolId)
   const { data: nominees, isSuccess: nomineesIsSuccess } = useGetPoolNomineesQuery(poolId)
-  
+
   let content
   if (poolIsFetching) {
     content = <Spinner text="Loading..." />

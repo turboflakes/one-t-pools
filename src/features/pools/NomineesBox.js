@@ -1,5 +1,9 @@
 import React from 'react'
+import { useSelector } from 'react-redux';
+import moment from 'moment'
 import Box from '@mui/material/Box';
+import { Typography } from '@mui/material';
+import Link from '@mui/material/Link';
 import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 import ListItemButton from '@mui/material/ListItemButton';
@@ -11,34 +15,35 @@ import ExpandMore from '@mui/icons-material/ExpandMore';
 import IconButton from '@mui/material/IconButton';
 import Identicon from '@polkadot/react-identicon';
 import polkadotJsSVG from '../../assets/polkadot_js_logo.svg';
-// import { ReactComponent as SubscanSVG } from '../../assets/subscan_logo.svg';
 import subscanSVG from '../../assets/subscan_logo.svg';
-
 import { Spinner } from '../../components/Spinner'
 import { useGetPoolNomineesQuery } from '../api/apiSlice'
-import { Typography } from '@mui/material';
+import {
+  selectChain,
+} from '../../features/chain/chainSlice';
+import {
+  getNetworkWSS,
+} from '../../constants';
+
 
 export const NomineesBox = ({poolId}) => {
 
   const { data, isFetching, isSuccess } = useGetPoolNomineesQuery(poolId)
-  
+  const selectedChain = useSelector(selectChain);
+
   const [open, setOpen] = React.useState(false);
 
   const handleClick = () => {
     setOpen(!open);
   };
 
-  const handleClickPolkadotJsExternal = (stash) => {
-    // const {network} = this.props
-    // const uri = encodeURI(`https://polkadot.js.org/apps/?rpc=${getNetworkWSS(network)}#/staking/query/${stash}`)
-    const uri = encodeURI(`https://polkadot.js.org/apps/?rpc=wss://westend-rpc.polkadot.io#/staking/query/${stash}`)
+  const handleClickPolkadotJsExternal = (stash, chain) => {
+    const uri = encodeURI(`https://polkadot.js.org/apps/?rpc=${getNetworkWSS(chain)}#/staking/query/${stash}`)
     window.open(uri, '_blank')
   }
 
-  const handleClickSubscanExternal = (stash) => {
-    // const {network} = this.props
-    // const uri = encodeURI(`https://${network}.subscan.io/validator/${stash}`)
-    const uri = encodeURI(`https://westend.subscan.io/validator/${stash}`)
+  const handleClickSubscanExternal = (stash, chain) => {
+    const uri = encodeURI(`https://${chain}.subscan.io/validator/${stash}`)
     window.open(uri, '_blank')
   }
 
@@ -67,15 +72,13 @@ export const NomineesBox = ({poolId}) => {
                 secondaryAction={
                   <Box component="span" sx={{ display: 'flex', flexDirection: 'row'}}>
                     <IconButton aria-label="Polkadot{.js}"
-                      onClick={() => handleClickPolkadotJsExternal(nominee.stash)}>
-                      {/* <PolkadotJsSVG sx={{ width: '26px', height: '26px' }} /> */}
+                      onClick={() => handleClickPolkadotJsExternal(nominee.stash, selectedChain)}>
                       <img src={polkadotJsSVG}  style={{ 
                         width: 26,
                         height: 26 }} alt={"github"}/>
                     </IconButton>
                     <IconButton aria-label="Subscan"
-                      onClick={() => handleClickSubscanExternal(nominee.stash)}>
-                      {/* <SubscanSVG sx={{ width: '26px', height: '26px' }}/> */}
+                      onClick={() => handleClickSubscanExternal(nominee.stash, selectedChain)}>
                       <img src={subscanSVG}  style={{ 
                         width: 26,
                         height: 26 }} alt={"github"}/>
@@ -94,10 +97,20 @@ export const NomineesBox = ({poolId}) => {
             </List>
           </Collapse>
         </List>
-        {!!data.nominees.last_nomination ? 
-        <Typography variant="caption">
-          Last Nomination: {data.nominees.last_nomination}
-        </Typography> : null}
+        {!!data.last_nomination ? 
+          <Typography variant="caption">
+            Last nomination finalized at block <Link href={`https://${selectedChain}.subscan.io/extrinsic/${data.last_nomination.extrinsic_hash}`}
+                target="_blank" rel="noreferrer" color="inherit" 
+                sx={{
+                  textDecoration: "underline",
+                  textDecorationThickness: 2,
+                  '&:hover': {
+                    textDecorationThickness: 2,
+                    // textDecorationColor: 'primary.main',
+                  }
+                }}>#{data.last_nomination.block_number}</Link> by {moment.unix(data.last_nomination.ts).utc().format("YYYY-MM-DD HH:mm:ss (+UTC)")}
+          </Typography>
+         : null}
       </Box>
     )
   }

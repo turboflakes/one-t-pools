@@ -8,6 +8,7 @@ import logoWestendSVG from '../assets/westend_icon.svg';
 // Define Network settings
 const networkSettings = {
   polkadot: {
+    name: "Polkadot",
     endpoint: process.env.REACT_APP_POLKADOT_API_ENDPOINT,
     externalWSS: "wss://rpc.polkadot.io",
     icon: iconPolkadotSVG,
@@ -16,6 +17,7 @@ const networkSettings = {
     maxValidators: 16
   },
   kusama: {
+    name: "Kusama",
     endpoint: process.env.REACT_APP_KUSAMA_API_ENDPOINT,
     externalWSS: "wss://kusama-rpc.polkadot.io",
     icon: iconKusamaSVG,
@@ -24,6 +26,7 @@ const networkSettings = {
     maxValidators: 24
   },
   westend: {
+    name: "Westend",
     endpoint: process.env.REACT_APP_WESTEND_API_ENDPOINT,
     externalWSS: "wss://westend-rpc.polkadot.io",
     icon: iconWestendSVG,
@@ -33,6 +36,7 @@ const networkSettings = {
   }
 }
 export const getNetworks = () => Object.keys(networkSettings)
+export const getNetworkName = (network) => networkSettings[network].name
 export const getNetworkHost = (network) => networkSettings[network].endpoint
 // Useful to open https://polkadot.js.org/apps/ with the right network
 export const getNetworkWSS = (network) => networkSettings[network].externalWSS
