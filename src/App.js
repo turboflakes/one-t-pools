@@ -57,7 +57,7 @@ function App() {
                 <PoolBox poolId={10} />
               </Grid>
               <Grid item xs={12} sm={6}>
-                <PoolBox poolId={15} extra=" and validators with a lower commission are scored higher" />
+                <PoolBox poolId={15} extra="Validators with a lower commission are scored higher. " />
               </Grid>
             </Grid>
           </Container>

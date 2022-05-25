@@ -33,7 +33,7 @@ export const PoolBox = ({poolId, extra}) => {
               </Box>
               {nomineesIsSuccess ?
               <Typography variant="subtitle2">
-              Nomination for {pool.metadata} is based on the best TVP validators performances of the last 48 sessions{extra ? extra : ''}. Only the <b>Top {nominees.nominees.length}</b> are nominated.
+              Nomination for {pool.metadata} is based on the best TVP validators performances of the last 48 sessions. {extra ? extra : ''}Only the <b>Top {nominees.nominees.length}</b> are nominated.
               </Typography> : null}
             </Box>
             <Divider />

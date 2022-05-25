@@ -57,7 +57,7 @@ export const NomineesBox = ({poolId}) => {
           component="nav"
         >
           <ListItemButton onClick={handleClick} disableRipple>
-            <ListItemText primary={`${data.nominees.length} Nominees`} />
+            <ListItemText primary={`Nominees (${data.nominees.length})`} />
             {open ? <ExpandLess /> : <ExpandMore />}
           </ListItemButton>
           <Collapse in={open} timeout="auto" unmountOnExit>
