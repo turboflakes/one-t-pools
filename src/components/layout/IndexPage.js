@@ -86,7 +86,7 @@ export const IndexPage = ({ match }) => {
                 <PoolBox poolId={10} api={api} />
               </Grid>
               <Grid item xs={12} sm={6}>
-                {/* <PoolBox poolId={15} api={api} extra="Validators with a lower commission are scored higher. " /> */}
+                <PoolBox poolId={15} api={api} extra="Validators with a lower commission are scored higher. " />
               </Grid>
             </Grid>
           </Container>

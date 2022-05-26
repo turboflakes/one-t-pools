@@ -2,8 +2,8 @@ import React from 'react'
 import { useSelector } from 'react-redux';
 import moment from 'moment'
 import Box from '@mui/material/Box';
-import { Typography } from '@mui/material';
 import Link from '@mui/material/Link';
+import ListSubheader from '@mui/material/ListSubheader';
 import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 import ListItemButton from '@mui/material/ListItemButton';
@@ -59,14 +59,26 @@ export const NomineesBox = ({poolId}) => {
       <Box>
         <List
           sx={{ width: '100%', bgcolor: 'background.paper' }}
-          component="nav"
-        >
+          component="nav">
           <ListItemButton onClick={handleClick} disableRipple>
             <ListItemText primary={`Nominees (${data.nominees.length})`} />
             {open ? <ExpandLess /> : <ExpandMore />}
           </ListItemButton>
           <Collapse in={open} timeout="auto" unmountOnExit>
-            <List component="div" disablePadding >
+            <List component="div" disablePadding subheader={
+            !!data.last_nomination ? 
+              <ListSubheader variant="div" sx={{m: 0, color: "text.primary", textAlign: "right"}}>
+                last nomination {moment.unix(data.last_nomination.ts).utc().format("DD/MM/YYYY")} finalized at block <Link href={`https://${selectedChain}.subscan.io/extrinsic/${data.last_nomination.extrinsic_hash}`}
+                target="_blank" rel="noreferrer" color="inherit" 
+                sx={{
+                  textDecoration: "underline",
+                  textDecorationThickness: 2,
+                  '&:hover': {
+                    textDecorationThickness: 2,
+                    // textDecorationColor: 'primary.main',
+                  }
+                }}>#{data.last_nomination.block_number}</Link> 
+              </ListSubheader> : null }>
               {!!data.nominees ? data.nominees.map((nominee, index) => 
                 <ListItem sx={{ pl: 4 }} key={index}
                 secondaryAction={
@@ -97,20 +109,6 @@ export const NomineesBox = ({poolId}) => {
             </List>
           </Collapse>
         </List>
-        {!!data.last_nomination ? 
-          <Typography variant="caption">
-            Last nomination finalized at block <Link href={`https://${selectedChain}.subscan.io/extrinsic/${data.last_nomination.extrinsic_hash}`}
-                target="_blank" rel="noreferrer" color="inherit" 
-                sx={{
-                  textDecoration: "underline",
-                  textDecorationThickness: 2,
-                  '&:hover': {
-                    textDecorationThickness: 2,
-                    // textDecorationColor: 'primary.main',
-                  }
-                }}>#{data.last_nomination.block_number}</Link> by {moment.unix(data.last_nomination.ts).utc().format("YYYY-MM-DD HH:mm:ss (+UTC)")}
-          </Typography>
-         : null}
       </Box>
     )
   }

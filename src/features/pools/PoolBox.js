@@ -1,4 +1,5 @@
 import React from 'react'
+import moment from 'moment'
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Card from '@mui/material/Card';
@@ -36,8 +37,13 @@ export const PoolBox = ({poolId, api, extra}) => {
               Nomination for {pool.metadata} is based on the best TVP validators performances of the last 48 sessions. {extra ? extra : ''}Only the <b>Top {nominees.nominees.length}</b> are nominated.
               </Typography> : null}
             </Box>
+            <Box display="flex">
+              <Typography variant="caption" align="right" sx={{width: '100%'}} gutterBottom>
+                last data sync {moment.unix(pool.ts).utc().format("DD/MM/YYYY HH:mm:ss (+UTC)")}
+              </Typography>
+            </Box>
             <Divider />
-            <Box sx={{ padding: '16px 0', display: 'flex', flexDirection: 'row', justifyContent: 'space-between' }}>
+            <Box sx={{ padding: '8px 0 16px 0', display: 'flex', flexDirection: 'row', justifyContent: 'space-between' }}>
               <Box sx={{ paddingRight: '32px' }}>
                 <Typography variant="h5">
                   {pool.member_counter}

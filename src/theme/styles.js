@@ -138,6 +138,7 @@ export default createTheme({
       }
     },
     caption: {
+      fontSize: "0.875rem",
       fontFamily: "'Roboto', sans-serif",
     },
     subtitle1: {
