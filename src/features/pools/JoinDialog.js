@@ -6,7 +6,6 @@ import Box from '@mui/material/Box';
 import Dialog from '@mui/material/Dialog';
 import DialogTitle from '@mui/material/DialogTitle';
 import DialogContent from '@mui/material/DialogContent';
-import DialogContentText from '@mui/material/DialogContentText';
 import DialogActions from '@mui/material/DialogActions';
 import IconButton from '@mui/material/IconButton';
 import CloseIcon from '@mui/icons-material/Close';
@@ -18,10 +17,7 @@ import ListItemText from '@mui/material/ListItemText';
 import ListItemAvatar from '@mui/material/ListItemAvatar';
 import ListItemButton from '@mui/material/ListItemButton';
 import InputAdornment from '@mui/material/InputAdornment';
-import FormControl from '@mui/material/FormControl';
 import TextField from '@mui/material/TextField';
-import AccountCircle from '@mui/icons-material/AccountCircle';
-import Avatar from '@mui/material/Avatar';
 import CheckIcon from '@mui/icons-material/Check';
 import Identicon from '@polkadot/react-identicon';
 import AddIcon from '@mui/icons-material/Add';
@@ -30,9 +26,6 @@ import {
   web3Accounts,
   web3Enable,
   web3FromSource,
-  web3FromAddress,
-  web3ListRpcProviders,
-  web3UseRpcProvider
 } from '@polkadot/extension-dapp';
 import {
   changeTo,
