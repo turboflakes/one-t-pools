@@ -22,11 +22,15 @@ export const chainSlice = createSlice({
     changeTo: (state, action) => {
       state.name = action.payload;
     },
+    setChainInfo: (state, action) => {
+      state.info = action.payload;
+    },
   },
 });
 
 export const selectChain = (state) => state.chain.name;
+export const selectChainInfo = (state) => state.chain.info;
 
-export const { changeTo } = chainSlice.actions;
+export const { changeTo, setChainInfo } = chainSlice.actions;
 
 export default chainSlice.reducer;

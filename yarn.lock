@@ -1772,6 +1772,28 @@
     eventemitter3 "^4.0.7"
     rxjs "^7.5.5"
 
+"@polkadot/extension-dapp@^0.43.2":
+  version "0.43.2"
+  resolved "https://registry.yarnpkg.com/@polkadot/extension-dapp/-/extension-dapp-0.43.2.tgz#5876d059c48dc4bc12eeb8ebbc9474ada066d118"
+  integrity sha512-4T5EgdIG34/RfWfqpBziHjIDbf6flrcZAnDnqsZZs/FOI2LgPGKkLwna5msHZXK7r+7vUfs2yg/KIKWAlNvYZQ==
+  dependencies:
+    "@babel/runtime" "^7.17.9"
+    "@polkadot/extension-inject" "^0.43.2"
+    "@polkadot/util" "^9.2.1"
+    "@polkadot/util-crypto" "^9.2.1"
+
+"@polkadot/extension-inject@^0.43.2":
+  version "0.43.2"
+  resolved "https://registry.yarnpkg.com/@polkadot/extension-inject/-/extension-inject-0.43.2.tgz#2c350e4f4f207162a9bb9691fad9c36aea3f6ad9"
+  integrity sha512-rl5sHyEKXaLyOeohDu5t8rdict/y790WPhapdNyrHDYOm55HM8p+K5AokdX1OCmBoad/crpAfRF2L1yevXHJww==
+  dependencies:
+    "@babel/runtime" "^7.17.9"
+    "@polkadot/rpc-provider" "^8.4.2"
+    "@polkadot/types" "^8.4.2"
+    "@polkadot/util" "^9.2.1"
+    "@polkadot/util-crypto" "^9.2.1"
+    "@polkadot/x-global" "^9.2.1"
+
 "@polkadot/keyring@^9.2.1":
   version "9.2.1"
   resolved "https://registry.yarnpkg.com/@polkadot/keyring/-/keyring-9.2.1.tgz#fecb189478d8f7e12ca413971691b5c7a887713a"
@@ -1830,7 +1852,7 @@
     "@polkadot/util" "^9.2.1"
     rxjs "^7.5.5"
 
-"@polkadot/rpc-provider@8.5.1":
+"@polkadot/rpc-provider@8.5.1", "@polkadot/rpc-provider@^8.4.2":
   version "8.5.1"
   resolved "https://registry.yarnpkg.com/@polkadot/rpc-provider/-/rpc-provider-8.5.1.tgz#a07ec3c07d9ee1aab3fc5fb927dc4708513a2732"
   integrity sha512-NUkY4+A0coSzmjkxOeRkxmS4ZtPO1R6N4RWsXoUZnNUpt3fHZt9qhZ7wd25VESaLEL3G646jC7svRTc8JTLJJA==
@@ -1896,7 +1918,7 @@
     "@babel/runtime" "^7.18.0"
     "@polkadot/util" "^9.2.1"
 
-"@polkadot/types@8.5.1":
+"@polkadot/types@8.5.1", "@polkadot/types@^8.4.2":
   version "8.5.1"
   resolved "https://registry.yarnpkg.com/@polkadot/types/-/types-8.5.1.tgz#4e7126b3189f90a81e069d13ef1a7192573cc8ba"
   integrity sha512-WQpcGEeZJsnCpEI6UdDLR8XY28+rg8LEvz7i6EUXdZyYyfa5m8kODpGnqgXd4BCGst5XHrBNn0D3NW7BHU+ZKQ==

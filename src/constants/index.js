@@ -14,7 +14,7 @@ const networkSettings = {
     icon: iconPolkadotSVG,
     logo: logoPolkadotSVG,
     url: "https://polkadot.network",
-    maxValidators: 16
+    maxValidators: 16,
   },
   kusama: {
     name: "Kusama",
@@ -23,7 +23,7 @@ const networkSettings = {
     icon: iconKusamaSVG,
     logo: logoKusamaSVG,
     url: "https://kusama.network",
-    maxValidators: 24
+    maxValidators: 24,
   },
   westend: {
     name: "Westend",
@@ -32,7 +32,7 @@ const networkSettings = {
     icon: iconWestendSVG,
     logo: logoWestendSVG,
     url: "https://polkadot.network",
-    maxValidators: 16
+    maxValidators: 16,
   }
 }
 export const getNetworks = () => Object.keys(networkSettings)

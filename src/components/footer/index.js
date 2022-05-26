@@ -40,9 +40,9 @@ const Footer = (props) => {
 							<Typography color="textSecondary" gutterBottom>
 								<Link href="https://www.turboflakes.io/#/about" underline="none" color="inherit">About us</Link>
 							</Typography>
-							<Typography color="textSecondary" gutterBottom>
+							{/* <Typography color="textSecondary" gutterBottom>
 								<Link href="https://www.turboflakes.io/#/tools" underline="none" color="inherit">Tools</Link>
-							</Typography>
+							</Typography> */}
 							<Typography color="textSecondary" gutterBottom>
 								<Link href="https://www.turboflakes.io/#/validators" underline="none" color="inherit">Validators</Link>
 							</Typography>

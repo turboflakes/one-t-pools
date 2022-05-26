@@ -5,12 +5,12 @@ import Card from '@mui/material/Card';
 import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
 import Divider from '@mui/material/Divider';
-import Button from '@mui/material/Button';
 import { NomineesBox } from './NomineesBox';
 import { Spinner } from '../../components/Spinner'
+import { JoinDialog } from './JoinDialog'
 import { useGetPoolQuery, useGetPoolNomineesQuery } from '../api/apiSlice'
 
-export const PoolBox = ({poolId, extra}) => {
+export const PoolBox = ({poolId, api, extra}) => {
 
   const { data: pool, isFetching: poolIsFetching, isSuccess: poolIsSuccess } = useGetPoolQuery(poolId)
   const { data: nominees, isSuccess: nomineesIsSuccess } = useGetPoolNomineesQuery(poolId)
@@ -28,7 +28,7 @@ export const PoolBox = ({poolId, extra}) => {
                   {pool.metadata.substring(0, 15)}
                 </Typography>
                 <CardActions sx={{ alignItems: "center", justifyContent: "center"}}>
-                  <Button variant="contained" size="large"sx={{minWidth: '128px'}} >Join</Button>
+                  <JoinDialog poolId={poolId} api={api} />
                 </CardActions>
               </Box>
               {nomineesIsSuccess ?

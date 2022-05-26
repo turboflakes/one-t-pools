@@ -5,6 +5,8 @@ import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Link from '@mui/material/Link';
+import { ApiPromise, WsProvider } from '@polkadot/api';
+import { getNetworkWSS } from '../../constants'
 import Header from '../header'
 import { PoolBox } from '../../features/pools/PoolBox'
 import onet from '../../assets/onet.svg';
@@ -13,12 +15,33 @@ import {
   selectChain,
 } from '../../features/chain/chainSlice';
 
+function useWeb3Api(chain) {
+  const [api, setApi] = React.useState(undefined);
+  
+  React.useEffect(() => {
+    
+    const wsProvider = new WsProvider(getNetworkWSS(chain));
+
+    const createWeb3Api = async (provider) => {
+      return await ApiPromise.create({ provider });
+    }
+
+    if (chain) {
+      createWeb3Api(wsProvider).then((api) => setApi(api));
+    }
+  }, [chain]);
+
+  return [api];
+}
+
+
 export const IndexPage = ({ match }) => {
   const selectedChain = useSelector(selectChain);
+  const [api] = useWeb3Api(selectedChain);
 
   return (
     <React.Fragment>
-      <Header />
+      <Header api={api} />
       <main style={{ background: "linear-gradient(180deg, #FFF, #F1F1F0)" }} >
           <Box
             sx={{
@@ -28,7 +51,7 @@ export const IndexPage = ({ match }) => {
             }}
           >
             <Container maxWidth="md">
-              <Box sx={{ display:'flex', flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', margin: `32px 0 64px 0`}}>
+              <Box sx={{ display:'flex', flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', margin: `8px 0 64px 0`}}>
                 <img src={onet} style={{width: 200, height: 200 }} alt={"logo"}/>
                 <Typography
                   component="h1"
@@ -60,10 +83,10 @@ export const IndexPage = ({ match }) => {
           <Container sx={{ py: 4 }} maxWidth="lg">
             <Grid container spacing={4}>
               <Grid item xs={12} sm={6}>
-                <PoolBox poolId={10} />
+                <PoolBox poolId={10} api={api} />
               </Grid>
               <Grid item xs={12} sm={6}>
-                <PoolBox poolId={15} extra="Validators with a lower commission are scored higher. " />
+                {/* <PoolBox poolId={15} api={api} extra="Validators with a lower commission are scored higher. " /> */}
               </Grid>
             </Grid>
           </Container>
