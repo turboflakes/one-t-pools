@@ -10,6 +10,9 @@ import DialogActions from '@mui/material/DialogActions';
 import IconButton from '@mui/material/IconButton';
 import CloseIcon from '@mui/icons-material/Close';
 import Typography from '@mui/material/Typography';
+import MenuItem from '@mui/material/MenuItem';
+import FormControl from '@mui/material/FormControl';
+import Select from '@mui/material/Select';
 import Link from '@mui/material/Link';
 import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
@@ -121,7 +124,7 @@ function useWeb3AccountsHook(isEnabled) {
   return [accounts];
 }
 
-function useWeb3JoinPool(api, chain, chainInfo, account, amount, poolId, joinIntent) {
+function useWeb3JoinPool(api, chain, account, tx, data, joinIntent) {
   const [result, setResult] = React.useState({status: "Waiting", message: "", errorMessage: ""});
 
   React.useEffect(() => {
@@ -130,9 +133,18 @@ function useWeb3JoinPool(api, chain, chainInfo, account, amount, poolId, joinInt
       return await web3FromSource(account.meta.source)
     }
 
-    if (api && chain && chainInfo && account && amount && poolId && joinIntent) {
+    if (api && chain && account && tx && data && joinIntent) {
       
-        const ext = api.tx.nominationPools.join(amount * Math.pow(10, chainInfo.tokenDecimals[0]), poolId);
+        let ext;
+        if (tx === "join") {
+          ext = api.tx.nominationPools.join(data.amount, data.poolId);
+        } else {
+          // const extra = api.createType("PalletNominationPoolsBondExtra", 'Rewards');
+          // const extra = api.createType('PalletNominationPoolsBondExtra', {FreeBalance: 1000000000000});
+          const extra = api.createType('PalletNominationPoolsBondExtra', data);
+          ext = api.tx.nominationPools.bondExtra(extra);
+        }
+        
         const {method: { method, section }} = ext
         const extDescription = `${section}.${method}`
 
@@ -204,7 +216,7 @@ function useWeb3JoinPool(api, chain, chainInfo, account, amount, poolId, joinInt
         })
     }
 
-  }, [api, chain, chainInfo, account, amount, poolId, joinIntent]);
+  }, [api, chain, account, tx, data, joinIntent]);
 
 
   React.useEffect(() => {
@@ -227,6 +239,29 @@ function useWeb3JoinPool(api, chain, chainInfo, account, amount, poolId, joinInt
   return [result];
 }
 
+function useWeb3PoolMembers(api, poolId, web3Account) {
+  const [isMember, setIsMember] = React.useState(undefined);
+
+  React.useEffect(() => {
+    
+    const fetchWeb3PoolMembers = async (api, web3Account) => {
+      return await api.query.nominationPools.poolMembers(web3Account.address);
+    }
+    
+    if (api && web3Account) {
+      fetchWeb3PoolMembers(api, web3Account).then((option) => {
+        if (option.isSome) {
+          if (option.value.poolId.eq(poolId)) {
+            setIsMember(true)
+          }
+        }
+      });
+		}
+  }, [api, poolId, web3Account]);
+
+  return [isMember];
+}
+
 export function JoinDialog({poolId, api}) {
   
   const dispatch = useDispatch();
@@ -236,14 +271,33 @@ export function JoinDialog({poolId, api}) {
 
   const [currentStep, setCurrentStep] = React.useState(0);
   const [amount, setAmount] = React.useState(1);
+  const [fundsType, setFundsType] = React.useState('Rewards');
   const [open, setOpen] = React.useState(false);
   const [selected, setSelect] = React.useState(web3Account);
   const [stepsCompleted, setStepsCompleted] = React.useState(false);
 
   const [isEnabled] = useWeb3EnableHook();
   const [accounts] = useWeb3AccountsHook(isEnabled);
-  const [result] = useWeb3JoinPool(api, selectedChain, selectedChainInfo, web3Account, amount, poolId, stepsCompleted);
-
+  const [isMember] = useWeb3PoolMembers(api, poolId, web3Account);
+  
+  const tx = isMember ? "bondExtra" : "join";
+  let data = undefined;
+  if (selectedChainInfo) {
+    if (isMember) {
+      if (fundsType === 'Rewards') {
+        data = 'Rewards'
+      } else {
+        data = {'FreeBalance': amount * Math.pow(10, selectedChainInfo.tokenDecimals[0])}
+      }
+    } else {
+      data = {
+        poolId,
+        amount: amount * Math.pow(10, selectedChainInfo.tokenDecimals[0])
+      }
+    }
+  }
+  const [result] = useWeb3JoinPool(api, selectedChain, web3Account, tx, data, stepsCompleted);
+  
   const handleClickOpen = () => {
     if (!!web3Account) {
       setCurrentStep(1);
@@ -291,7 +345,10 @@ export function JoinDialog({poolId, api}) {
       return setAmount(1);
     } 
     setAmount(parseInt(e.target.value));
-    
+  }
+
+  const handleChangeFundsType = (e) => {
+    setFundsType(e.target.value);
   }
 
   // If extrinsic failed return to previous step, if succeededs close dialog
@@ -304,17 +361,17 @@ export function JoinDialog({poolId, api}) {
   return (
     <div>
       <Button variant="contained" size="large" sx={{minWidth: '128px'}} onClick={handleClickOpen}>
-        <AddIcon sx={{ mr: 1}} /> Join
+        <AddIcon sx={{ mr: 1}} /> {isMember ? 'Bond extra' : 'Join'}
       </Button>
       <BootstrapDialog
         aria-labelledby="customized-dialog-title"
         open={open}
       >
         <BootstrapDialogTitle id="customized-dialog-title" onClose={handleClose}>
-          {isEnabled ? steps[currentStep] : 'Access to Polkadot{.js}'}
+          {isEnabled ? ( isMember && currentStep === 1 ? `Bond extra into pool` : steps[currentStep]) : 'Access to Polkadot{.js}'}
         </BootstrapDialogTitle>
         {isEnabled ?
-          <DialogContent dividers sx={{width: 544, height: 320}}>
+          <DialogContent dividers sx={{width: 576, height: 360}}>
             {currentStep === 0 ? 
               <List sx={{ width: '100%', height: "100%", overflow: 'auto', bgcolor: 'background.paper' }}>
                 {accounts.map((account, index) => 
@@ -342,8 +399,10 @@ export function JoinDialog({poolId, api}) {
                   </ListItem>
                 )}
               </List> : (currentStep === 1 ? 
-                <Box sx={{ p: 4 }}>
-                  <Typography variant="subtitle2" gutterBottom>The account that is to join the pool:</Typography>
+                <Box sx={{ pl: 4, pt: 1 }}>
+                  <Typography variant="subtitle2" gutterBottom>
+                    {isMember ? `The member account that is to bond extra into the pool id ${poolId}:` : `The account that is to join the pool id ${poolId}:`}
+                  </Typography>
                   <Box display="flex" alignItems="center" sx={{ mb: 3}}>
                     <Identicon
                       value={web3Account.address}
@@ -351,38 +410,64 @@ export function JoinDialog({poolId, api}) {
                       theme={'polkadot'} />
                     <Typography variant='h5' sx={{ pl: 2 }}>{web3Account.meta.name}</Typography>
                   </Box>
-                  <Typography variant="subtitle2" gutterBottom>The initial value to assign to the pool:</Typography>
-                  <TextField
-                    autoFocus
-                    margin="dense"
-                    variant="outlined"
-                    type="number"
-                    defaultValue={amount}
-                    onChange={handleChangeAmount}
-                    InputLabelProps={{
-                      shrink: true,
-                    }}
-                    InputProps={{
-                      startAdornment: (
-                        <InputAdornment position="start" disableTypography>
-                          {selectedChainInfo.tokenSymbol[0]}
-                        </InputAdornment>
-                      ),
-                    }}
-                    helperText={`1 ${selectedChainInfo.tokenSymbol[0]} = ${Math.pow(10, selectedChainInfo.tokenDecimals[0])} Planks`}
-                  />
+                  {isMember ? 
+                    <Box sx={{ maxWidth: 320, mb: 2 }}>
+                      <Typography variant="subtitle2" gutterBottom>Type of funds to bond:</Typography>
+                      <FormControl fullWidth>
+                        <Select
+                          value={fundsType}
+                          onChange={handleChangeFundsType}
+                        >
+                          <MenuItem value="Rewards">Pool rewards</MenuItem>
+                          <MenuItem value="FreeBalance">Free balance</MenuItem>
+                        </Select>
+                      </FormControl>
+                    </Box> : null}
+                  {!isMember || (isMember && fundsType === "FreeBalance") ?
+                  <Box sx={{ maxWidth: 320 }}>
+                    <Typography variant="subtitle2" gutterBottom>Additional free funds to bond:</Typography>
+                    <TextField
+                      autoFocus
+                      fullWidth
+                      margin="none"
+                      variant="outlined"
+                      type="number"
+                      value={amount}
+                      onChange={handleChangeAmount}
+                      InputLabelProps={{
+                        shrink: true,
+                      }}
+                      InputProps={{
+                        startAdornment: (
+                          <InputAdornment position="start" disableTypography>
+                            {selectedChainInfo.tokenSymbol[0]}
+                          </InputAdornment>
+                        ),
+                      }}
+                      helperText={`${amount} ${selectedChainInfo.tokenSymbol[0]} = ${amount * Math.pow(10, selectedChainInfo.tokenDecimals[0])} Planks`}
+                    />
+                  </Box> : null}
                 </Box> : (currentStep === 2 ? 
-                  <Box sx={{ p: 4 }}>
-                    <Typography variant="caption">{`tx: nominationPools.join(${amount * Math.pow(10, selectedChainInfo.tokenDecimals[0])}, ${poolId})`}</Typography>
-                    <Typography variant="h5" gutterBottom>nominationPools.join(amount, poolId)</Typography>
-                    
-                    <Typography variant="subtitle2">Stake funds with a pool. The amount to bond is transferred from the member to the pools account and immediately increases the pools bond. </Typography>
+                  <Box sx={{ pl: 4, pt: 1 }}>
+                    {isMember ? 
+                      <Box>
+                        <Typography variant="caption">{`tx: nominationPools.bondExtra( extra: ${JSON.stringify(data)} )`}</Typography>
+                        <Typography variant="h5" gutterBottom>nominationPools.bondExtra(extra)</Typography>
+                        <Typography variant="subtitle2">Bond extra more funds from origin into the pool to which they already belong.</Typography>
+                      </Box> :
+                      <Box>
+                        <Typography variant="caption">{`tx: nominationPools.join(${amount * Math.pow(10, selectedChainInfo.tokenDecimals[0])}, ${poolId})`}</Typography>
+                        <Typography variant="h5" gutterBottom>nominationPools.join(amount, poolId)</Typography>
+                        <Typography variant="subtitle2">Stake funds with a pool. The amount to bond is transferred from the member to the pools account and immediately increases the pools bond.</Typography>
+                      </Box> }
                   </Box> :
 
-                  <Box sx={{ p: 4 }}>
-                    <Typography variant="caption" gutterBottom>{`tx: nominationPools.join(${amount * Math.pow(10, selectedChainInfo.tokenDecimals[0])}, ${poolId})`}</Typography>
+                  <Box sx={{ pl: 4, pt: 1 }}>
+                    {isMember ? 
+                      <Typography variant="caption" gutterBottom>{`tx: nominationPools.bondExtra( extra: ${JSON.stringify(data)} )`}</Typography> : 
+                      <Typography variant="caption" gutterBottom>{`tx: nominationPools.join(${amount * Math.pow(10, selectedChainInfo.tokenDecimals[0])}, ${poolId})`}</Typography> 
+                    }
                     <Typography variant="h5" gutterBottom>{result.status}</Typography>
-
                     {!!result.message ? <Typography variant='body2' gutterBottom>{result.message}</Typography> : null}
                     {!!result.errorMessage ? <Typography variant='body2' color="primary.main" gutterBottom>Error: {result.errorMessage}</Typography> : null}
                     
@@ -416,7 +501,7 @@ export function JoinDialog({poolId, api}) {
               </Button>
               <Typography sx={{ position: 'absolute', left: 240}}>{`${currentStep + 1} / 3`}</Typography>
               <Button autoFocus onClick={handleNext} size="large" disabled={!["Waiting", "Failed"].includes(result.status)}>
-                {stepsActions[currentStep]}
+                { isMember && currentStep === 1 ? `+ Bond extra` : stepsActions[currentStep]}
               </Button>
             </DialogActions> : null }
       </BootstrapDialog>
@@ -425,5 +510,5 @@ export function JoinDialog({poolId, api}) {
 }
 
 JoinDialog.propTypes = {
-  poolId: PropTypes.number,
+  poolId: PropTypes.string,
 };

@@ -80,7 +80,7 @@ function Header({api}) {
 							height: 32 }} alt={"westend"}/>
 						{selected === "westend" ? <Typography variant='h5' sx={{ paddingLeft: '8px'}}>Westend</Typography> : null}
 					</ToggleButton>
-					<ToggleButton value="kusama" aria-label="Kusama Network">
+					<ToggleButton value="kusama" aria-label="Kusama Network" disabled>
 						<img src={getNetworkIcon("kusama")}  style={{ 
 							width: 32,
 							height: 32 }} alt={"kusama"}/>

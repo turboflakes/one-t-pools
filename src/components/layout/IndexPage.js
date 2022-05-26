@@ -10,7 +10,7 @@ import { getNetworkWSS } from '../../constants'
 import Header from '../header'
 import { PoolBox } from '../../features/pools/PoolBox'
 import onet from '../../assets/onet.svg';
-import { getNetworkName } from '../../constants'
+import { getNetworkName, getNetworkPoolId } from '../../constants'
 import {
   selectChain,
 } from '../../features/chain/chainSlice';
@@ -83,10 +83,10 @@ export const IndexPage = ({ match }) => {
           <Container sx={{ py: 4 }} maxWidth="lg">
             <Grid container spacing={4}>
               <Grid item xs={12} sm={6}>
-                <PoolBox poolId={10} api={api} />
+                <PoolBox poolId={getNetworkPoolId(selectedChain, 0)} api={api} />
               </Grid>
               <Grid item xs={12} sm={6}>
-                <PoolBox poolId={15} api={api} extra="Validators with a lower commission are scored higher. " />
+                <PoolBox poolId={getNetworkPoolId(selectedChain, 1)} api={api} extra="Validators with a lower commission are scored higher. " />
               </Grid>
             </Grid>
           </Container>
