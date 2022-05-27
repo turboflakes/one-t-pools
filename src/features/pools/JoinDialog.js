@@ -84,21 +84,23 @@ BootstrapDialogTitle.propTypes = {
   onClose: PropTypes.func.isRequired,
 };
 
-function useWeb3EnableHook() {
+function useWeb3EnableHook(isOpen) {
   const [isEnabled, setIsEnabled] = React.useState(false);
   
   React.useEffect(() => {
     const isWeb3Enabled = async () => {
       // returns an array of all the injected sources
       // (this needs to be called first, before other requests)
-      const allInjected = await web3Enable('pools.turboflakes.io'); 
+      const allInjected = await web3Enable('one-t.turboflakes.io'); 
       if (allInjected.length > 0) {
         setIsEnabled(true);
       }
     }
     
-    isWeb3Enabled()
-  }, []);
+    if (isOpen) {
+      isWeb3Enabled()
+    }
+  }, [isOpen]);
 
   return [isEnabled];
 }
@@ -276,7 +278,7 @@ export function JoinDialog({poolId, api}) {
   const [selected, setSelect] = React.useState(web3Account);
   const [stepsCompleted, setStepsCompleted] = React.useState(false);
 
-  const [isEnabled] = useWeb3EnableHook();
+  const [isEnabled] = useWeb3EnableHook(open);
   const [accounts] = useWeb3AccountsHook(isEnabled);
   const [isMember] = useWeb3PoolMembers(api, poolId, web3Account);
   
