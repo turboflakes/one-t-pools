@@ -8,7 +8,7 @@ const validateChain = (path) => {
     return chain
   }
   // set default
-  document.location.pathname = '/westend';
+  // document.location.pathname = '/westend';
 }
 
 const initialState = {
