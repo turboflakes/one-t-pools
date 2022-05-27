@@ -1,4 +1,3 @@
-/* global BigInt */
 import * as React from 'react';
 import PropTypes from 'prop-types';
 import { useSelector, useDispatch } from 'react-redux';
@@ -281,7 +280,7 @@ export function JoinDialog({poolId, api}) {
   const [accounts] = useWeb3AccountsHook(isEnabled);
   const [isMember] = useWeb3PoolMembers(api, poolId, web3Account);
   
-  const decimals = BigInt(10 ** selectedChainInfo.tokenDecimals[0]);
+  const decimals = 10 ** selectedChainInfo.tokenDecimals[0];
   const amountInPlancks = amount * Number(decimals);
 
   const tx = isMember ? "bondExtra" : "join";
