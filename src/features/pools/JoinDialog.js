@@ -280,7 +280,7 @@ export function JoinDialog({poolId, api}) {
   const [accounts] = useWeb3AccountsHook(isEnabled);
   const [isMember] = useWeb3PoolMembers(api, poolId, web3Account);
   
-  const decimals = 10 ** selectedChainInfo.tokenDecimals[0];
+  const decimals = !!selectedChainInfo ? 10 ** selectedChainInfo.tokenDecimals[0] : 0;
   const amountInPlancks = amount * Number(decimals);
 
   const tx = isMember ? "bondExtra" : "join";
