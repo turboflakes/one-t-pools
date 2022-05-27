@@ -1,3 +1,4 @@
+/* global BigInt */
 import * as React from 'react';
 import PropTypes from 'prop-types';
 import { useSelector, useDispatch } from 'react-redux';
@@ -280,6 +281,9 @@ export function JoinDialog({poolId, api}) {
   const [accounts] = useWeb3AccountsHook(isEnabled);
   const [isMember] = useWeb3PoolMembers(api, poolId, web3Account);
   
+  const decimals = !!selectedChainInfo ? BigInt(Math.pow(10, selectedChainInfo.tokenDecimals[0])) : 0;
+  const amountInPlancks = Number(decimals);
+
   const tx = isMember ? "bondExtra" : "join";
   let data = undefined;
   if (selectedChainInfo) {
@@ -287,12 +291,12 @@ export function JoinDialog({poolId, api}) {
       if (fundsType === 'Rewards') {
         data = 'Rewards'
       } else {
-        data = {'FreeBalance': amount * Math.pow(10, selectedChainInfo.tokenDecimals[0])}
+        data = {'FreeBalance': amountInPlancks}
       }
     } else {
       data = {
         poolId,
-        amount: amount * Math.pow(10, selectedChainInfo.tokenDecimals[0])
+        amount: amountInPlancks
       }
     }
   }
@@ -444,7 +448,7 @@ export function JoinDialog({poolId, api}) {
                           </InputAdornment>
                         ),
                       }}
-                      helperText={`${amount} ${selectedChainInfo.tokenSymbol[0]} = ${amount * Math.pow(10, selectedChainInfo.tokenDecimals[0])} Planks`}
+                      helperText={`${amount} ${selectedChainInfo.tokenSymbol[0]} = ${amountInPlancks} Planks`}
                     />
                   </Box> : null}
                 </Box> : (currentStep === 2 ? 
@@ -456,7 +460,7 @@ export function JoinDialog({poolId, api}) {
                         <Typography variant="subtitle2">Bond extra more funds from origin into the pool to which they already belong.</Typography>
                       </Box> :
                       <Box>
-                        <Typography variant="caption">{`tx: nominationPools.join(${amount * Math.pow(10, selectedChainInfo.tokenDecimals[0])}, ${poolId})`}</Typography>
+                        <Typography variant="caption">{`tx: nominationPools.join(${amountInPlancks}, ${poolId})`}</Typography>
                         <Typography variant="h5" gutterBottom>nominationPools.join(amount, poolId)</Typography>
                         <Typography variant="subtitle2">Stake funds with a pool. The amount to bond is transferred from the member to the pools account and immediately increases the pools bond.</Typography>
                       </Box> }
@@ -465,7 +469,7 @@ export function JoinDialog({poolId, api}) {
                   <Box sx={{ pl: 4, pt: 1 }}>
                     {isMember ? 
                       <Typography variant="caption" gutterBottom>{`tx: nominationPools.bondExtra( extra: ${JSON.stringify(data)} )`}</Typography> : 
-                      <Typography variant="caption" gutterBottom>{`tx: nominationPools.join(${amount * Math.pow(10, selectedChainInfo.tokenDecimals[0])}, ${poolId})`}</Typography> 
+                      <Typography variant="caption" gutterBottom>{`tx: nominationPools.join(${amountInPlancks}, ${poolId})`}</Typography> 
                     }
                     <Typography variant="h5" gutterBottom>{result.status}</Typography>
                     {!!result.message ? <Typography variant='body2' gutterBottom>{result.message}</Typography> : null}
