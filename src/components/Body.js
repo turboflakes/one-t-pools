@@ -25,22 +25,38 @@ function Body({api}) {
 					pb: 6,
 				}}
 			>
-				<Container maxWidth="md">
-					<Box sx={{ display:'flex', flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', margin: `8px 0 64px 0`}}>
-						<img src={onet} style={{width: 200, height: 200 }} alt={"logo"}/>
-						<Typography
-							component="h1"
-							variant="h2"
-							align="left"
-							color="text.primary"
-							gutterBottom
-						>
-							<div style={{fontSize: "1.75rem"}}>Welcome to</div>
-							ONE-T Nomination Pools
-						</Typography>
+				<Container maxWidth="lg">
+					<Box sx={{ display:'flex', flexDirection: 'row', justifyContent: 'center', alignItems: 'center', margin: `8px 0 64px 0`}}>
+						<Box >
+							<img src={onet} style={{width: 288, height: 288 }} alt={"logo"}/>
+						</Box>
+						<Box>
+							<Typography
+								component="h1"
+								variant="h2"
+								align="left"
+								color="text.primary"
+								gutterBottom
+							>
+								<div style={{fontSize: "1.75rem"}}>Welcome to</div>
+								ONE-T Nomination Pools
+							</Typography>
+							<Typography variant="subtitle1" align="left" color="text.primary">
+							Join a pool and share in staking rewards from the <br />top-best <Link href="https://wiki.polkadot.network/docs/thousand-validators" 
+								target="_blank" rel="noreferrer" color="inherit" 
+								sx={{
+									textDecoration: "underline",
+									textDecorationThickness: 4,
+									'&:hover': {
+										textDecorationThickness: 4,
+										// textDecorationColor: 'primary.main',
+									}
+								}}>TVP</Link> validators of <b>{getNetworkName(selected)}</b> - curated by ONE-T.
+							</Typography>
+						</Box>
 					</Box>
 
-					<Typography variant="subtitle1" align="center" color="text.primary">
+					{/* <Typography variant="subtitle1" align="center" color="text.primary">
 					Join a pool and share in staking rewards from the <br />top-best <Link href="https://wiki.polkadot.network/docs/thousand-validators" 
 						target="_blank" rel="noreferrer" color="inherit" 
 						sx={{
@@ -51,7 +67,7 @@ function Body({api}) {
 								// textDecorationColor: 'primary.main',
 							}
 						}}>TVP</Link> validators of <b>{getNetworkName(selected)}</b> - curated by ONE-T.
-					</Typography>
+					</Typography> */}
 				</Container>
 
 			</Box>
