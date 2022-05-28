@@ -119,7 +119,7 @@ function Body({api}) {
 							There are several different ways to measure a validator Performance. ONE-T focus is strictly based on para-validator performance, which means that only when a validator is assigned to para-validate in a new session is when it's performance is evaluated. Performance tracks three categories:
 <br/>1. The amount of missed candidate backing votes for parachains. Less is better.
 <br/>2. The total amount of para-validador points collected per session. More is better.
-<br/>3. How many times a validator has been para-validator for the last X sessions. (This is a completely random factor, so it weight is the lowest of the 3, but still an important one. The more assignments a validator has, the more chances of missing candidate backing votes).
+<br/>3. How many times a validator has been para-validator for the last X sessions. More is better. (This is a completely random factor, so it weight is the lowest of the 3, but still an important one. The more assignments a validator has, the more chances of missing candidate backing votes).
             </Typography>
             <Typography
 							variant="body1"
