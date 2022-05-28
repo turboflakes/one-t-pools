@@ -2,17 +2,19 @@ import { createSlice } from '@reduxjs/toolkit';
 
 const chains = ['westend', 'kusama', 'polkadot'];
 
-const validateChain = (path) => {
-  const chain = path.substring(1, path.length)
-  if (chains.includes(chain)) {
+const validateChain = () => {
+  //example: hash= "#/polkadot"
+  const chain = document.location.hash.substring(2, document.location.hash.length)
+  if (document.location.pathname === '/' && chains.includes(chain)) {
     return chain
   }
   // set default
-  // document.location.pathname = '/westend';
+  document.location.hash = '#/westend';
+  document.location.pathname = '/';
 }
 
 const initialState = {
-  name: validateChain(document.location.pathname)
+  name: validateChain()
 };
 
 export const chainSlice = createSlice({

@@ -12,7 +12,7 @@ import { JoinDialog } from './JoinDialog'
 import { useGetPoolQuery, useGetPoolNomineesQuery } from '../api/apiSlice'
 
 export const PoolBox = ({poolId, api, extra}) => {
-
+  
   const { data: pool, isFetching: poolIsFetching, isSuccess: poolIsSuccess } = useGetPoolQuery(poolId)
   const { data: nominees, isSuccess: nomineesIsSuccess } = useGetPoolNomineesQuery(poolId)
 

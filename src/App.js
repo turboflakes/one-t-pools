@@ -1,25 +1,51 @@
 import React from 'react';
 import {
-  BrowserRouter as Router,
+  HashRouter as Router,
   Switch,
   Route,
-  Redirect,
-} from 'react-router-dom'
-import Footer from './components/footer'
+  Redirect
+} from "react-router-dom";
+
 import withTheme from './theme/withTheme'
 import { IndexPage } from './components/layout/IndexPage'
+import { LayoutPage } from './components/layout/LayoutPage'
+import {isNetworkSupported} from './constants'
+
+function LayoutRoute({
+  layout: Layout,  
+  page: Page,  
+  ...rest
+}) {
+  return (
+    <Route {...rest} render={props => {
+        if (isNetworkSupported(props.match.params.chainName) || typeof props.match.params.chainName === "undefined") {
+          return (
+            <Layout {...props} >
+              <Page {...props} />
+            </Layout>
+          )
+        }
+        return (
+          <Redirect
+            to={{
+              pathname: "/westend",
+              state: { from: props.location }
+            }}
+          />  
+        )
+      }
+    } />
+  );
+}
 
 function App() {
   return (
-    <Router>
-      <div>
+      <Router>
         <Switch>
-          <Route exact path="/:chainName" component={IndexPage} />
+          <LayoutRoute exact strict path="/:chainName" layout={LayoutPage} page={IndexPage} />
           <Redirect to="/westend" />
         </Switch>
-      </div>
-      <Footer />
-    </Router>
+      </Router>
   );
 }
 

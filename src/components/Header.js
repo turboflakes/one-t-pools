@@ -7,17 +7,17 @@ import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import ToggleButton from '@mui/material/ToggleButton';
 import ToggleButtonGroup from '@mui/material/ToggleButtonGroup';
-import { getNetworkIcon } from '../../constants'
-import { apiSlice } from '../../features/api/apiSlice'
-import polkadotJsSVG from '../../assets/polkadot_js_logo.svg';
+import { getNetworkIcon } from '../constants'
+import { apiSlice } from '../features/api/apiSlice'
+import polkadotJsSVG from '../assets/polkadot_js_logo.svg';
 import {
 	setChainInfo,
   changeTo,
   selectChain,
-} from '../../features/chain/chainSlice';
+} from '../features/chain/chainSlice';
 import {
   selectAccount,
-} from '../../features/web3/web3Slice';
+} from '../features/web3/web3Slice';
 
 
 function useWeb3ChainInfo(api) {
@@ -41,20 +41,20 @@ function useWeb3ChainInfo(api) {
 
 function Header({api}) {
 	const history = useHistory()
-	
 	const dispatch = useDispatch();
+
 	const selected = useSelector(selectChain);
 	const web3Account = useSelector(selectAccount);
 	useWeb3ChainInfo(api);
 
-	const handleChainSelection = (event, selectedChain) => {
+	const handleChainSelection = (ev, selectedChain) => {
 		if (selectedChain === null) {
 			return;
 		}
 		dispatch(changeTo(selectedChain));
 		// Invalidate cached pools so it re-fetchs pools from selected chain
 		dispatch(apiSlice.util.invalidateTags(['Pool']));
-		history.push(`/${selectedChain}`)
+		history.replace(`/${selectedChain}`)
   };
 
   return (
@@ -80,13 +80,13 @@ function Header({api}) {
 							height: 32 }} alt={"westend"}/>
 						{selected === "westend" ? <Typography variant='h5' sx={{ paddingLeft: '8px'}}>Westend</Typography> : null}
 					</ToggleButton>
-					<ToggleButton value="kusama" aria-label="Kusama Network" disabled>
+					<ToggleButton value="kusama" aria-label="Kusama Network">
 						<img src={getNetworkIcon("kusama")}  style={{ 
 							width: 32,
 							height: 32 }} alt={"kusama"}/>
 						{selected === "kusama" ? <Typography variant='h5' sx={{ paddingLeft: '8px'}}>Kusama</Typography> : null}
 					</ToggleButton>
-					<ToggleButton value="polkadot" aria-label="Polkadot Network" disabled>
+					<ToggleButton value="polkadot" aria-label="Polkadot Network">
 						<img src={getNetworkIcon("polkadot")}  style={{ 
 							width: 32,
 							height: 32 }} alt={"polkadot"}/>

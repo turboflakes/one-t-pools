@@ -6,9 +6,9 @@ import Grid from '@mui/material/Grid';
 import Link from '@mui/material/Link';
 import IconButton from '@mui/material/IconButton';
 import EmailIcon from '@mui/icons-material/EmailRounded';
-import logo from '../../assets/logo/logo_1_inverted_subtract_turboflakes_.svg';
-import twitterSVG from '../../assets/twitter_white.svg';
-import githubSVG from '../../assets/github_white.svg';
+import logo from '../assets/logo/logo_1_inverted_subtract_turboflakes_.svg';
+import twitterSVG from '../assets/twitter_white.svg';
+import githubSVG from '../assets/github_white.svg';
 
 const Footer = (props) => {
 	
