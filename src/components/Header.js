@@ -61,6 +61,7 @@ function Header({api}) {
 		<AppBar position="static" color="transparent" sx={{ bgcolor: "#FFF"}} elevation={0}>
 			<Toolbar sx={{ display: 'flex', justifyContent: 'flex-end', alignItems: 'center' }}>
 				<ToggleButtonGroup
+					// orientation="vertical"
 					value={selected}
 					exclusive
 					onChange={handleChainSelection}

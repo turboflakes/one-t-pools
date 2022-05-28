@@ -21,7 +21,7 @@ export const PoolBox = ({poolId, api, extra}) => {
     content = <Spinner text="Loading..." />
   } else if (poolIsSuccess) {
     content = (
-      <Card sx={{ height: '100%', border: '2px solid rgba(0, 0, 0, 0.12)', borderRadius: '16px' }} elevation={0}>
+      <Card sx={{ height: '100%', borderRadius: '16px' }} elevation={0}>
           <CardContent sx={{ flexGrow: 1 }}>
             <Box sx={{ padding: '0', minHeight: '160px', display: 'flex', flexDirection: 'column' }}>
               <Box sx={{ marginBottom: '16px', display: 'flex', flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
