@@ -11,6 +11,7 @@ const validateChain = () => {
   // set default
   document.location.hash = '#/westend';
   document.location.pathname = '/';
+  return 'westend'
 }
 
 const initialState = {

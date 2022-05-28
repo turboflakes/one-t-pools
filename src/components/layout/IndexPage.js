@@ -11,16 +11,15 @@ import {
 
 function useWeb3Api(chain) {
   const [api, setApi] = React.useState(undefined);
-  
+
   React.useEffect(() => {
     
-    const wsProvider = new WsProvider(getNetworkWSS(chain));
-
     const createWeb3Api = async (provider) => {
       return await ApiPromise.create({ provider });
     }
 
     if (chain) {
+      const wsProvider = new WsProvider(getNetworkWSS(chain));
       createWeb3Api(wsProvider).then((api) => setApi(api));
     }
   }, [chain]);
