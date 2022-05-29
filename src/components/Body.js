@@ -91,7 +91,7 @@ function Body({api}) {
 							align="left"
 							paragraph
             >
-            ONE-T is a validator performance report bot for the <i>Polkadot</i> and <i>Kusama</i> networks with special focus on the <b>One T</b>housand validator programme. <IconButton 
+            ONE-T is a validator-performance report bot for the <i>Polkadot</i> and <i>Kusama</i> networks with special focus on the <b>One T</b>housand validator programme. <IconButton 
                 onClick={() => handleExt()}
                   color="inherit"
                   size="small"
@@ -106,20 +106,39 @@ function Body({api}) {
 							align="left"
 							paragraph
 							>  
-							How ONE-T performance is measured?
+							How ONE-T performance is evaluated?
             </Typography>
-
-						
             <Typography
 							variant="body1"
 							color="textPrimary"
 							align="left"
 							paragraph
 							>  
-							There are several different ways to measure a validator Performance. ONE-T focus is strictly based on para-validator performance, which means that only when a validator is assigned to para-validate in a new session is when it's performance is evaluated. Performance tracks three categories:
-<br/>1. The amount of missed candidate backing votes for parachains. Less is better.
-<br/>2. The total amount of para-validador points collected per session. More is better.
-<br/>3. How many times a validator has been para-validator for the last X sessions. More is better. (This is a completely random factor, so it weight is the lowest of the 3, but still an important one. The more assignments a validator has, the more chances of missing candidate backing votes).
+							There are several different ways to assess a validator <i>performance</i>. ONE-T measure performance strictly by how a validator operates when para-validator.
+						</Typography>
+						<Typography
+							variant="body1"
+							color="textPrimary"
+							align="left"
+							paragraph
+							>  
+							At every new session all para-validators are tracked on the amount of missed candidate backing votes for parachains. The ones that miss less are performing better. 
+						</Typography>
+						<Typography
+							variant="body1"
+							color="textPrimary"
+							align="left"
+							paragraph
+							>
+							Also during para-validator time, not only the amount of votes, counts towards the total of para-validator points. There is data availablity amoung other things that increase the overall para-validator points during the session. Which means that the validators that in average have higher para-validator points over an amount of <i>X</i> sessions are performing better.
+							</Typography>
+							<Typography
+							variant="body1"
+							color="textPrimary"
+							align="left"
+							paragraph
+							>
+							In all these things there is inevitably a random factor - how many times a validator is a para-validator. Being this a completely random factor, the weight of this category in the performance evaluation is the lowest. But is still very important because of the fact that the more assignments a validator has, the more chances one have to miss candidate backing votes. Having more para-validator sessions is better and slithly increase the performance score.
             </Typography>
             <Typography
 							variant="body1"
@@ -127,7 +146,16 @@ function Body({api}) {
 							align="left"
 							paragraph
 							>
-							At the end of each era the score is calculated based on the 3 points previously described (score formula). A higher score means top performance.
+							At the end of each era the performance <Link href="https://github.com/turboflakes/one-t/blob/main/SCORES.md#performance-score" 
+								target="_blank" rel="noreferrer" color="inherit" 
+								sx={{
+									textDecoration: "underline",
+									textDecorationThickness: 4,
+									'&:hover': {
+										textDecorationThickness: 4,
+										// textDecorationColor: 'primary.main',
+									}
+								}}>score</Link> is calculated based on the 3 categories previously described. A higher score means top performance.
             </Typography>
           </Grid>
           <Grid item xs sm></Grid>
