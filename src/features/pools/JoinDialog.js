@@ -406,7 +406,7 @@ export function JoinDialog({poolId, api}) {
               </List> : (currentStep === 1 ? 
                 <Box sx={{ pl: 4, pt: 1 }}>
                   <Typography variant="subtitle2" gutterBottom>
-                    {isMember ? `The member account that is to bond extra into the pool id ${poolId}:` : `The account that is to join the pool id ${poolId}:`}
+                    {isMember ? `The member account that is to bond extra into the ONE-T (Pool ${poolId}):` : `The account that is to join the ONE-T (Pool ${poolId}):`}
                   </Typography>
                   <Box display="flex" alignItems="center" sx={{ mb: 3}}>
                     <Identicon

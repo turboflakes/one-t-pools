@@ -26,7 +26,8 @@ export const PoolBox = ({poolId, api, extra}) => {
             <Box sx={{ padding: '0', minHeight: '160px', display: 'flex', flexDirection: 'column' }}>
               <Box sx={{ marginBottom: '16px', display: 'flex', flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
                 <Typography variant="h3" component="h2">
-                  {pool.metadata.substring(0, 15)}
+                  {/* {pool.metadata.substring(0, 15)} */}
+                  ONE-T (Pool {poolId})
                 </Typography>
                 <CardActions sx={{ alignItems: "center", justifyContent: "center"}}>
                   <JoinDialog poolId={poolId} api={api} />
