@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { useSelector } from 'react-redux';
+import { useTheme } from '@mui/material/styles';
 import Container from '@mui/material/Container';
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
@@ -16,8 +17,9 @@ import {
 
 
 function Body({api}) {
+	// const theme = useTheme();
 	const selected = useSelector(selectChain);
-	
+
 	const handleExt = () => {
 		window.open('https://wiki.polkadot.network/docs/thousand-validators', '_blank')
 	}
@@ -44,7 +46,7 @@ function Body({api}) {
 								color="text.primary"
 								gutterBottom
 							>
-								<div style={{fontSize: "1.75rem"}}>Welcome to</div>
+								<Typography variant="h5" >Welcome to</Typography>
 								ONE-T Nomination Pools
 							</Typography>
 							<Typography variant="subtitle1" align="left" color="text.primary">

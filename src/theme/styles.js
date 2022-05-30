@@ -1,7 +1,7 @@
-import { createTheme } from '@mui/material/styles';
+import { createTheme, responsiveFontSizes } from '@mui/material/styles';
 
 // https://material-ui.com/customization/default-theme/?expend-path=$.palette
-export default createTheme({
+let theme = createTheme({
   container: {
     maxWidth: "1140px",
     margin: "0 auto"
@@ -125,6 +125,9 @@ export default createTheme({
     h5: {
       fontFamily: "'Gilroy-Heavy', 'Helvetica Neue', 'Arial', sans-serif",
       fontSize: "1.5rem",
+      '@media screen and (max-width: 900px)': {
+        fontSize: "1.125rem",
+      }
     },
     h6: {
       fontFamily: "'Roboto', sans-serif",
@@ -317,3 +320,5 @@ export default createTheme({
     // }
   }
 });
+
+export default responsiveFontSizes(theme)
