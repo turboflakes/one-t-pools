@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { useSelector } from 'react-redux';
-// import { useTheme } from '@mui/material/styles';
+import { useTheme } from '@mui/material/styles';
+import useMediaQuery from '@mui/material/useMediaQuery';
 import Container from '@mui/material/Container';
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
@@ -17,7 +18,8 @@ import {
 
 
 function Body({api}) {
-	// const theme = useTheme();
+	const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down('md'));
 	const selected = useSelector(selectChain);
 
 	// const handleExt = () => {
@@ -34,9 +36,10 @@ function Body({api}) {
 				}}
 			>
 				<Container maxWidth="lg" sx={{}}>
-					<Box sx={{ minHeight: '60vh', display:'flex', flexDirection: 'row', justifyContent: 'center', alignItems: 'center', margin: `8px 0 64px 0`}}>
+					<Box sx={isMobile ? {minHeight: '60vh', display:'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', margin: `8px 0 64px 0`} : 
+						{minHeight: '60vh', display:'flex', flexDirection: 'row', justifyContent: 'center', alignItems: 'center', margin: `8px 0 64px 0`}}>
 						{/* <Box > */}
-							<img src={onet} style={{width: 288, height: 288 }} alt={"logo"}/>
+							<img src={onet} style={isMobile ? {width: 128, height: 128, margin: `8px 0 32px 0` } : {width: 288, height: 288 }} alt={"logo"}/>
 						{/* </Box> */}
 						<Box>
 							<Typography
@@ -245,7 +248,7 @@ function Body({api}) {
 							<Grid item xs sm={3}>
 							</Grid>
 							<Grid item xs={12} sm={3} align="center">
-								<Link sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center'}}
+								<Link sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', p: 2}}
 										color="textPrimary" target="_blank" rel="noreferrer"
 										href="https://matrix.to/#/%23kusama-one-t-bot:matrix.org">
 									<img style={{width: 80}} 
@@ -259,7 +262,7 @@ function Body({api}) {
 								</Link>
 							</Grid>
 							<Grid item xs={12} sm={3} align="center">
-								<Link sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center'}}
+								<Link sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', p: 2}}
 									color="textPrimary" target="_blank" rel="noreferrer"
 									href="https://matrix.to/#/%23polkadot-one-t-bot:matrix.org">
 									<img style={{width: 80}} 
