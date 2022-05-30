@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { useSelector } from 'react-redux';
-import { useTheme } from '@mui/material/styles';
+// import { useTheme } from '@mui/material/styles';
 import Container from '@mui/material/Container';
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
@@ -93,7 +93,8 @@ function Body({api}) {
 							align="left"
 							paragraph
             >
-            ONE-T is a validator-performance report bot for the <i>Polkadot</i> and <i>Kusama</i> networks with special focus on the <b>One T</b>housand validator programme. <IconButton 
+            ONE-T is a validator-performance report bot for the <i>Polkadot</i> and <i>Kusama</i> networks with special focus on the <b>One T</b>housand validator programme. 
+						<IconButton 
                 onClick={() => handleExt()}
                   color="inherit"
                   size="small"
@@ -116,7 +117,7 @@ function Body({api}) {
 							align="left"
 							paragraph
 							>  
-							There are several different ways to assess a validator <i>performance</i>. ONE-T measure performance strictly by how a validator operates when para-validator.
+							There are several different ways to assess a validator <i>performance</i>. ONE-T measure performance strictly when a validator is selected to participate in the parachain consensus.
 						</Typography>
 						<Typography
 							variant="body1"
