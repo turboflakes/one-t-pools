@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux';
 import { ApiPromise, WsProvider } from '@polkadot/api';
 import Header from '../Header'
 import Body from '../Body'
-import { Spinner } from '../Spinner'
+import { Loading } from '../Loading'
 import { getNetworkWSS } from '../../constants'
 import {
   selectChain,
@@ -32,7 +32,7 @@ export const IndexPage = () => {
   const [api] = useWeb3Api(selectedChain);
 
   if (!api) {
-    return (<Spinner text="Loading..." />)
+    return (<Loading />)
   } else {
     return (
       <React.Fragment>
