@@ -9,9 +9,9 @@ const validateChain = () => {
     return chain
   }
   // set default
-  document.location.hash = '#/westend';
+  document.location.hash = '#/kusama';
   document.location.pathname = '/';
-  return 'westend'
+  return 'kusama'
 }
 
 const initialState = {
