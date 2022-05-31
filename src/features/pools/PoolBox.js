@@ -34,7 +34,7 @@ export const PoolBox = ({poolId, api, extra}) => {
                 </CardActions>
               </Box>
               <Typography variant="subtitle2">
-              Nomination for ONE-T (Pool {poolId}) is based on the top-best TVP validators performances of the last {nominees.sessions_counter ? nominees.sessions_counter : 'X'} sessions. {extra ? extra : ''}{nomineesIsSuccess ? <span>Only the <b>Top {nominees.nominees.length}</b> are nominated</span> : <b>Nominations are comming soon!</b>}
+              Nomination for ONE-T (Pool {poolId}) is based on the top-best TVP validators performances of the last {nominees.sessions_counter ? nominees.sessions_counter : 'X'} sessions. {extra ? extra : ''}{nomineesIsSuccess ? <span>Only the <b>Top {nominees.nominees.length}</b> are nominated</span> : <b>Nominations will be triggered soon!</b>}
               </Typography>
             </Box>
             <Box display="flex">
