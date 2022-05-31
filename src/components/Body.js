@@ -62,7 +62,7 @@ function Body({api}) {
 										textDecorationThickness: 4,
 										// textDecorationColor: 'primary.main',
 									}
-								}}>TVP</Link> validators of <b>{getNetworkName(selected)}</b> - curated by ONE-T.
+								}}>TVP</Link> validators performances of <b>{getNetworkName(selected)}</b> - curated by ONE-T.
 							</Typography>
 						</Box>
 					</Box>
