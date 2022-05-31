@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/static/css/main.83e131c1.css",
-    "main.js": "/static/js/main.6ae23393.js",
+    "main.js": "/static/js/main.b8472363.js",
     "static/js/27.e3a4af4b.chunk.js": "/static/js/27.e3a4af4b.chunk.js",
     "static/media/onet.svg": "/static/media/onet.939204028101409068e0d9f94ad911d2.svg",
     "static/media/Gilroy-Heavy.woff": "/static/media/Gilroy-Heavy.dbda9b6f113c99bdb28c.woff",
@@ -20,6 +20,6 @@
   },
   "entrypoints": [
     "static/css/main.83e131c1.css",
-    "static/js/main.6ae23393.js"
+    "static/js/main.b8472363.js"
   ]
 }
