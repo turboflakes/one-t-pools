@@ -33,10 +33,9 @@ export const PoolBox = ({poolId, api, extra}) => {
                   <JoinDialog poolId={poolId} api={api} />
                 </CardActions>
               </Box>
-              {nomineesIsSuccess ?
               <Typography variant="subtitle2">
-              Nomination for {pool.metadata} is based on the best TVP validators performances of the last 48 sessions. {extra ? extra : ''}Only the <b>Top {nominees.nominees.length}</b> are nominated.
-              </Typography> : null}
+              Nomination for ONE-T (Pool {poolId}) is based on the top-best TVP validators performances of the last {nominees.sessions_counter ? nominees.sessions_counter : 'X'} sessions. {extra ? extra : ''}{nomineesIsSuccess ? <span>Only the <b>Top {nominees.nominees.length}</b> are nominated</span> : <b>Nominations are comming soon!</b>}
+              </Typography>
             </Box>
             <Box display="flex">
               <Typography variant="caption" align="right" sx={{width: '100%'}} gutterBottom>
