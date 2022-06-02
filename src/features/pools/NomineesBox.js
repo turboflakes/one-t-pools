@@ -86,24 +86,29 @@ export const NomineesBox = ({poolId}) => {
                     <IconButton aria-label="Polkadot{.js}"
                       onClick={() => handleClickPolkadotJsExternal(nominee.stash, selectedChain)}>
                       <img src={polkadotJsSVG}  style={{ 
-                        width: 26,
-                        height: 26 }} alt={"github"}/>
+                        width: 16,
+                        height: 16 }} alt={"github"}/>
                     </IconButton>
                     <IconButton aria-label="Subscan"
                       onClick={() => handleClickSubscanExternal(nominee.stash, selectedChain)}>
                       <img src={subscanSVG}  style={{ 
-                        width: 26,
-                        height: 26 }} alt={"github"}/>
+                        width: 16,
+                        height: 16 }} alt={"github"}/>
                     </IconButton>
                   </Box>
                 }>
-                  <ListItemAvatar>
+                  <ListItemAvatar sx={{minWidth: 0, pr: 2, display: "flex", justifyContent: "center"}}>
                     <Identicon
                       value={nominee.stash}
-                      size={32}
+                      size={24}
                       theme={'polkadot'} />
                   </ListItemAvatar>
-                  <ListItemText primary={nominee.identity.substring(0, 32)} />
+                  <ListItemText primary={nominee.identity.substring(0, 32)} primaryTypographyProps={{
+                    variant: "subtitle2",
+                    style: {
+                      
+                    }
+                    }} />
                 </ListItem>)
                   : null}
             </List>
