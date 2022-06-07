@@ -53,7 +53,7 @@ function Body({api}) {
 								ONE-T Nomination Pools
 							</Typography>
 							<Typography variant="subtitle1" align="left" color="text.primary">
-							Join a pool and share in staking rewards from the <br />top-best <Link href="https://wiki.polkadot.network/docs/thousand-validators" 
+							Join a pool and share in staking rewards from the best <Link href="https://wiki.polkadot.network/docs/thousand-validators" 
 								target="_blank" rel="noreferrer" color="inherit" 
 								sx={{
 									textDecoration: "underline",
@@ -210,7 +210,7 @@ function Body({api}) {
 							align="left"
 							paragraph
 							>
-						With ONE-T performance score is easy to build a ranking and pick up the top-best validator performances from the last <i>X</i> sessions. Although this is not a guarantee that the top-best validators will remain be on top of the ranking in subsequent sessions, most-likely they are trusted and will continue to out perform and be a very handy group of validators to select, when choosing the validator candidates that help you earn higher staking rewards. This is what ONE-T Nomination Pools is all about. <b>ONE-T nominates the top-best TVP validators performers (24 on Kusama and 16 on Polkadot) into a specific nomination pool once a day</b>.
+						With ONE-T performance score is easy to build a ranking and pick up the best validator performances from the last <i>X</i> sessions. Although this is not a guarantee that the best validators will remain be on top of the ranking in subsequent sessions, most-likely they are trusted and will continue to out perform and be a very handy group of validators to select, when choosing the validator candidates that help you earn higher staking rewards. This is what ONE-T Nomination Pools is all about. <b>ONE-T nominates the top 16 best TVP validators performers (16 on Polkadot and 24 on Kusama) into a specific nomination pool once a day</b>.
             </Typography>
 						<Typography
 							variant="body1"
@@ -218,7 +218,7 @@ function Body({api}) {
 							align="left"
 							paragraph
 							>
-						One more thing - performance is not only what nominators look for in their selection criteria. Validator commission takes a huge weight when is time to choose validators to nominate. And with this in mind, ONE-T also has a ranking of the top-best validators performances running on a lower commission. This ranking is than used to pick the top validators (12 on Kusama and 8 on Polkadot) and nominate them into a specific nomination pool.
+						One more thing - performance is not only what nominators look for in their selection criteria. Validator commission takes a huge weight when is time to choose validators to nominate. And with this in mind, ONE-T also has a ranking of the top 8 best validators performances running on lower commission. This ranking is than used to pick the top validators (8 on Polkadot and 12 on Kusama) and nominate them into a specific nomination pool.
             </Typography>
 						<Typography
 							variant="body1"
