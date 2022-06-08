@@ -44,6 +44,10 @@ export const apiSlice = createApi({
       query: (poolId) => `/pool/${poolId}/nominees`,
       providesTags: (result, error, arg) => [{ type: 'Pool', id: arg }],
     }),
+    getPoolNomination: builder.query({
+      query: (poolId) => `/pool/${poolId}/nomination`,
+      providesTags: (result, error, arg) => [{ type: 'Pool', id: arg }],
+    }),
   }),
 })
 
@@ -51,4 +55,5 @@ export const {
   useGetApiInfoQuery,
   useGetPoolQuery,
   useGetPoolNomineesQuery,
+  useGetPoolNominationQuery,
 } = apiSlice

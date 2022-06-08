@@ -17,7 +17,7 @@ import Identicon from '@polkadot/react-identicon';
 import polkadotJsSVG from '../../assets/polkadot_js_logo.svg';
 import subscanSVG from '../../assets/subscan_logo.svg';
 import { Spinner } from '../../components/Spinner'
-import { useGetPoolNomineesQuery } from '../api/apiSlice'
+import { useGetPoolNomineesQuery, useGetPoolNominationQuery } from '../api/apiSlice'
 import {
   selectChain,
 } from '../../features/chain/chainSlice';
@@ -28,7 +28,8 @@ import {
 
 export const NomineesBox = ({poolId}) => {
 
-  const { data, isFetching, isSuccess } = useGetPoolNomineesQuery(poolId)
+  const { data, isFetching: isFetchingNominees, isSuccess: isSuccessNominees } = useGetPoolNomineesQuery(poolId)
+  const { data: lastNomination, isSuccess: isSuccessLastNomination } = useGetPoolNominationQuery(poolId)
   const selectedChain = useSelector(selectChain);
 
   const [open, setOpen] = React.useState(false);
@@ -47,13 +48,13 @@ export const NomineesBox = ({poolId}) => {
     window.open(uri, '_blank')
   }
 
-  if (isFetching) {
+  if (isFetchingNominees) {
     return (
       <section>
         <Spinner text="Loading..." />
       </section>
     )
-  } else if (isSuccess) {
+  } else if (isSuccessNominees) {
     
     return (
       <Box>
@@ -66,9 +67,9 @@ export const NomineesBox = ({poolId}) => {
           </ListItemButton>
           <Collapse in={open} timeout="auto" unmountOnExit>
             <List component="div" disablePadding subheader={
-            !!data.last_nomination ? 
+            isSuccessLastNomination && !!lastNomination.block_number ? 
               <ListSubheader variant="div" sx={{m: 0, color: "text.primary", textAlign: "right"}}>
-                last nomination {moment.unix(data.last_nomination.ts).utc().format("DD/MM/YYYY")} finalized at block <Link href={`https://${selectedChain}.subscan.io/extrinsic/${data.last_nomination.extrinsic_hash}`}
+                last nomination {moment.unix(lastNomination.ts).utc().format("DD/MM/YYYY")} finalized at block <Link href={`https://${selectedChain}.subscan.io/extrinsic/${lastNomination.extrinsic_hash}`}
                 target="_blank" rel="noreferrer" color="inherit" 
                 sx={{
                   textDecoration: "underline",
@@ -77,7 +78,7 @@ export const NomineesBox = ({poolId}) => {
                     textDecorationThickness: 2,
                     // textDecorationColor: 'primary.main',
                   }
-                }}>#{data.last_nomination.block_number}</Link> 
+                }}>#{lastNomination.block_number}</Link> 
               </ListSubheader> : null }>
               {!!data.nominees ? data.nominees.map((nominee, index) => 
                 <ListItem sx={{ pl: 4 }} key={index}
