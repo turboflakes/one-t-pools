@@ -71,12 +71,18 @@ function Body({api}) {
 			</Box>
 			<div style={{ backgroundColor: '#0B1317'}}>
 				<Container sx={{ py: 20 }} maxWidth="lg">
+					<Typography
+								variant="h3"
+								color="textSecondary"
+								align="left"
+								paragraph
+					>ONE-T Nomination Pools</Typography>
 					<Grid container spacing={4}>
 						<Grid item xs={12} sm={6}>
 							<PoolBox poolId={getNetworkPoolId(selected, 0)} api={api} />
 						</Grid>
 						<Grid item xs={12} sm={6}>
-							<PoolBox poolId={getNetworkPoolId(selected, 1)} api={api} extra="Validators with a lower commission are scored higher. " />
+							<PoolBox poolId={getNetworkPoolId(selected, 1)} api={api} extra="Validators with a lower commission (LC) are scored higher. " />
 						</Grid>
 					</Grid>
 				</Container>

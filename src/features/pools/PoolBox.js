@@ -6,15 +6,18 @@ import Card from '@mui/material/Card';
 import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
 import Divider from '@mui/material/Divider';
+import InfoIcon from '@mui/icons-material/Info';
+import Tooltip from '@mui/material/Tooltip';
 import { NomineesBox } from './NomineesBox';
 import { Spinner } from '../../components/Spinner'
 import { JoinDialog } from './JoinDialog'
-import { useGetPoolQuery, useGetPoolNomineesQuery } from '../api/apiSlice'
+import { useGetPoolQuery, useGetPoolNomineesQuery, useGetPoolNominationQuery } from '../api/apiSlice'
 
 export const PoolBox = ({poolId, api, extra}) => {
   
   const { data: pool, isFetching: poolIsFetching, isSuccess: poolIsSuccess } = useGetPoolQuery(poolId)
-  const { data: nominees, isSuccess: nomineesIsSuccess } = useGetPoolNomineesQuery(poolId)
+  const { data: nominees, isSuccess: isSuccessNominees } = useGetPoolNomineesQuery(poolId)
+  const { data: lastNomination, isSuccess: isSuccessLastNomination } = useGetPoolNominationQuery(poolId)
 
   let content
   if (poolIsFetching) {
@@ -23,18 +26,25 @@ export const PoolBox = ({poolId, api, extra}) => {
     content = (
       <Card sx={{ height: '100%', borderRadius: '16px' }} elevation={0}>
           <CardContent sx={{ flexGrow: 1 }}>
-            <Box sx={{ padding: '0', minHeight: '160px', display: 'flex', flexDirection: 'column' }}>
+            <Box sx={{ padding: '0', minHeight: '224px', display: 'flex', flexDirection: 'column' }}>
               <Box sx={{ marginBottom: '16px', display: 'flex', flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
-                <Typography variant="h3" component="h2">
-                  {/* {pool.metadata.substring(0, 15)} */}
-                  ONE-T (Pool {poolId})
-                </Typography>
+                <Box sx={{}}>
+                  <Typography variant="subtitle2">
+                    {pool.metadata}
+                  </Typography>
+                  <Typography variant="h3" component="h2">
+                    Pool {poolId}
+                  </Typography>
+                </Box>
                 <CardActions sx={{ alignItems: "center", justifyContent: "center"}}>
                   <JoinDialog poolId={poolId} api={api} />
                 </CardActions>
               </Box>
-              <Typography variant="subtitle2">
-              Nomination for ONE-T (Pool {poolId}) is based on the top-best TVP validators performances of the last {!!nominees ? nominees.sessions_counter : 'X'} sessions. {extra ? extra : ''}{nomineesIsSuccess ? <span>Only the <b>Top {nominees.nominees.length}</b> are nominated</span> : <b>Stay tuned. Nominations will be triggered soon :)</b>}
+              <Typography gutterBottom>
+              Nomination for ONE-T (Pool Id: {poolId}) is based on the best TVP validators performances of the last {isSuccessLastNomination && !!lastNomination.sessions_counter ? lastNomination.sessions_counter : 'X'} sessions. {extra ? extra : ''}
+              </Typography>
+              <Typography>
+              {isSuccessNominees ? <span>Only the <b>Top {nominees.nominees.length}</b> are nominated for this pool.</span> : <b>Stay tuned. Nominations will be triggered soon :)</b>}
               </Typography>
             </Box>
             <Box display="flex">
@@ -62,11 +72,16 @@ export const PoolBox = ({poolId, api, extra}) => {
               </Box>
               <Box>
                 <Typography variant="h4">
-                {nomineesIsSuccess ? `${Math.round(nominees.apr * 10000) / 100}%` : '-'}
+                {isSuccessNominees ? `${Math.round(nominees.apr * 10000) / 100}%` : '-'}
                 </Typography>
-                <Typography variant='subtitle2'>
-                  APR
-                </Typography>
+                <Box display="flex" justifyContent="left" alignItems="center">
+                  <Typography variant='subtitle2'>
+                    APR
+                  </Typography>
+                  <Tooltip title="APR is the Annual Percentage Rate. The Nomination Pool APR is based on the average APR of all the current pool nominees for the last 4 eras in Polkadot and the last 8 eras in Kusama.">
+                    <InfoIcon fontSize="inherit" sx={{ml: 1}}/>
+                  </Tooltip>
+                </Box>
               </Box>
             </Box>
             <NomineesBox poolId={poolId} />

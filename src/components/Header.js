@@ -69,7 +69,7 @@ function Header({api}) {
 					sx={{ display: 'flex', alignItems: 'center'	}}
 				>
 					{!!web3Account ? 
-						<Box sx={{ mr: 3, p: 1, display: 'flex', alignItems: 'center', bgcolor: 'background.secondary', borderRadius: 3}}>
+						<Box sx={{ mr: 3, p: 1, mt: 1, display: 'flex', alignItems: 'center', bgcolor: 'background.secondary', borderRadius: 3}}>
 							<Typography variant="body2" color="text.secondary" sx={{ pl: 1, pr: 1 }} >{web3Account.meta.name}</Typography>
 							<img src={polkadotJsSVG} style={{ 
 								width: 26,
