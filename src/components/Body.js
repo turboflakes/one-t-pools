@@ -210,8 +210,16 @@ function Body({api}) {
 							align="left"
 							paragraph
 							>
-						With ONE-T performance score is easy to build a ranking and pick up the best validator performances from the last <i>X</i> sessions. Although this is not a guarantee that the best validators will remain be on top of the ranking in subsequent sessions, most-likely they are trusted and will continue to out perform and be a very handy group of validators to select, when choosing the validator candidates that help you earn higher staking rewards. This is what ONE-T Nomination Pools is all about. <b>ONE-T nominates the top 16 best TVP validators performers (16 on Polkadot and 24 on Kusama) into a specific nomination pool once a day</b>.
-            </Typography>
+						With ONE-T performance score is easy to build a ranking and pick up the best validator performances from the last <i>X</i> sessions. Although this is not a guarantee that the best validators will remain on top of the ranking in subsequent sessions, most likely they are trusted and will continue to out perform. These are a very handy group of validators to select when choosing the validator candidates that help you earn higher staking rewards. And this is what ONE-T Nomination Pools is all about.
+						</Typography>
+						<Typography
+							variant="body1"
+							color="textPrimary"
+							align="left"
+							paragraph
+							>
+							<b>ONE-T nominates the top 16 best TVP validators performers</b> (16 on Polkadot and 24 on Kusama) into a specific nomination pool once a day.
+						</Typography>
 						<Typography
 							variant="body1"
 							color="textPrimary"
@@ -226,7 +234,7 @@ function Body({api}) {
 							align="left"
 							paragraph
 							>
-						Be a member and join ONE-T nomination pools. 
+						<b>Be a member and join ONE-T nomination pools. </b>
             </Typography>
 						<Typography
 							variant="h3"
