@@ -166,14 +166,14 @@ let theme = createTheme({
   overrides: {
     MuiButton: {
       outlined: {
-        borderRadius: 30,
+        // borderRadius: 30,
         borderWidth: 2,
         padding: `8px 16px`
       },
       contained: {
         borderRadius: 30,
         padding: `8px 16px`
-      }
+      },
     },
     MuiInputBase: {
       input: {

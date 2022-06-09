@@ -1,5 +1,6 @@
 import * as React from 'react';
-import { useSelector } from 'react-redux';
+import { useHistory } from 'react-router-dom'
+import { useSelector, useDispatch } from 'react-redux';
 import { useTheme } from '@mui/material/styles';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import Container from '@mui/material/Container';
@@ -7,25 +8,38 @@ import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Link from '@mui/material/Link';
+import Button from '@mui/material/Button';
+import AddIcon from '@mui/icons-material/Add';
 // import IconButton from '@mui/material/IconButton';
 // import ArrowRightIcon from '@mui/icons-material/ArrowRight';
 import { PoolBox } from '../features/pools/PoolBox'
 import { PoolsBox } from '../features/pools/PoolsBox'
 import onet from '../assets/onet.svg';
-import { getNetworkName, getNetworkPoolId } from '../constants'
+import { getNetworkName, getNetworkPoolId, getNetworkIcon } from '../constants'
+import { apiSlice } from '../features/api/apiSlice'
 import {
+  changeTo,
   selectChain,
 } from '../features/chain/chainSlice';
 
 
 function Body({api}) {
 	const theme = useTheme();
-  	const isMobile = useMediaQuery(theme.breakpoints.down('md'));
+  const history = useHistory()
+	const dispatch = useDispatch();
+  const isMobile = useMediaQuery(theme.breakpoints.down('md'));
 	const selected = useSelector(selectChain);
 
 	// const handleExt = () => {
 	// 	window.open('https://wiki.polkadot.network/docs/thousand-validators', '_blank')
 	// }
+
+  const handleClick = () => {
+    dispatch(changeTo('kusama'));
+		// Invalidate cached pools so it re-fetchs pools from selected chain
+		dispatch(apiSlice.util.invalidateTags(['Pool']));
+    history.replace(`/${'kusama'}`)
+  };
 
   return (
 		<main style={{ background: "linear-gradient(180deg, #FFF, #F1F1F0)" }} >
@@ -71,14 +85,37 @@ function Body({api}) {
 
 			</Box>
 			<div style={{ backgroundColor: '#0B1317'}}>
-      {/* <div style={{ backgroundColor: '#FFF'}}> */}
+        {/* TODO - only temporary until nomination pols are not available at Polkadot */}
+      {selected === "polkadot" ? 
+      <Container sx={{ py: 20 }} maxWidth="lg">
+        <Typography
+              variant="h3"
+              color="textSecondary"
+              align="center"
+              paragraph
+        >ONE-T Nomination Pools are comming soon to Polkadot</Typography>
+        <Typography
+              variant="subtitle1"
+              color="textSecondary"
+              align="center"
+              paragraph
+        >Until then, stay tuned and join ONE-T Nomination Pools at Kusama</Typography>
+        <Box sx={{ width: '100%', display: 'flex', justifyContent: 'center'}}>
+          <Button variant="contained" color='secondary' size="large" sx={{minWidth: '128px', borderRadius: 16, border: 0, mt: 6, p: `16px 24px`}} onClick={handleClick}>
+            <img src={getNetworkIcon("kusama")}  style={{ 
+							width: 32,
+							height: 32 }} alt={"kusama"}/>
+            <Typography variant='h5' sx={{ paddingLeft: '8px'}}>Kusama</Typography>
+          </Button>
+        </Box>
+      </Container> : 
 				<Container sx={{ py: 20 }} maxWidth="lg">
 					<Typography
 								variant="h3"
 								color="textSecondary"
 								align="left"
 								paragraph
-					>ONE-T Nomination Pools</Typography>
+					>ONE-T Nomination Pools at {getNetworkName(selected)}</Typography>
 					<Grid container spacing={4} sx={{ mb: 4 }}>
 						<Grid item xs={12} sm={6}>
 							<PoolBox poolId={getNetworkPoolId(selected, 0)} api={api} />
@@ -88,7 +125,7 @@ function Body({api}) {
 						</Grid>
 					</Grid>
 					<PoolsBox api={api} />
-				</Container>
+				</Container>}
 			</div>
 			<Container sx={{ py: 20 }} maxWidth="lg">
 				<Grid container>

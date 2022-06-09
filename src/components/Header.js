@@ -11,9 +11,9 @@ import { getNetworkIcon } from '../constants'
 import { apiSlice } from '../features/api/apiSlice'
 import polkadotJsSVG from '../assets/polkadot_js_logo.svg';
 import {
-	setChainInfo,
-  changeTo,
-  selectChain,
+	  setChainInfo,
+  	changeTo,
+  	selectChain,
 } from '../features/chain/chainSlice';
 import {
   selectAccount,
