@@ -126,14 +126,14 @@ export const PoolsBox = () => {
         .reduce((previousValue, currentValue) => previousValue + currentValue, 0) / (data.pools.length) : 0
     
     return (
-      <Box>
+      <Box sx={{ mt: 8 }}>
         <Typography
 								variant="h3"
 								color="textSecondary"
 								align="left"
 								paragraph
-					>{`ONE-T Nomination Pools with ${Math.round(onetAPR)}% APR`}</Typography>
-        <Typography color="textSecondary" sx={{maxWidth: '100%'}} paragraph>At the present era - <i>{getNetworkName(selectedChain)} // {data.era}</i> - the average APR for all nomination pools is {Math.round(allAPR)}%. In comparison, ONE-T nomination pools offer <b>{Math.round(onetAPR)}% APR</b>.</Typography>
+					>{`ONE-T with ${Math.round(onetAPR)}% APR vs Other Pools`}</Typography>
+        <Typography color="textSecondary" sx={{maxWidth: '100%'}} paragraph>At the present era - <i>{`${getNetworkName(selectedChain)} // ${data.era}`}</i> - the average APR for all nomination pools is {Math.round(allAPR)}%. In comparison, ONE-T nomination pools offer <b>{Math.round(onetAPR)}% APR</b>.</Typography>
         <Box sx={{ position: 'relative' }}>
           <Box sx={{ height: '628px', width: '100%',  
             '.MuiDataGrid-virtualScroller': {
