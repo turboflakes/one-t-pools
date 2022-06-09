@@ -41,7 +41,7 @@ export const PoolBox = ({poolId, api, extra}) => {
                 </CardActions>
               </Box>
               <Typography gutterBottom>
-              Nomination for ONE-T (Pool Id: {poolId}) is based on the best TVP validators performances of the last {isSuccessLastNomination && !!lastNomination.sessions_counter ? lastNomination.sessions_counter : 'X'} sessions. {extra ? extra : ''}
+              Nomination for ONE-T (Pool {poolId}) is based on the best TVP validators performances of the last {isSuccessLastNomination && !!lastNomination.sessions_counter ? lastNomination.sessions_counter : 'X'} sessions. {extra ? extra : ''}
               </Typography>
               <Typography>
               {isSuccessNominees ? <span>Only the <b>Top {nominees.nominees.length}</b> are nominated for this pool.</span> : <b>Stay tuned. Nominations will be triggered soon :)</b>}
@@ -49,7 +49,7 @@ export const PoolBox = ({poolId, api, extra}) => {
             </Box>
             <Box display="flex">
               <Typography variant="caption" align="right" sx={{width: '100%'}} gutterBottom>
-                last data sync {moment.unix(pool.ts).utc().format("DD/MM/YYYY HH:mm:ss (+UTC)")}
+                last data sync {moment.unix(pool.ts).utc().format("DD/MM/YYYY HH:mm:ss (UTC)")}
               </Typography>
             </Box>
             <Divider />

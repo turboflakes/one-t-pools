@@ -10,6 +10,7 @@ import Link from '@mui/material/Link';
 // import IconButton from '@mui/material/IconButton';
 // import ArrowRightIcon from '@mui/icons-material/ArrowRight';
 import { PoolBox } from '../features/pools/PoolBox'
+import { PoolsBox } from '../features/pools/PoolsBox'
 import onet from '../assets/onet.svg';
 import { getNetworkName, getNetworkPoolId } from '../constants'
 import {
@@ -19,7 +20,7 @@ import {
 
 function Body({api}) {
 	const theme = useTheme();
-  const isMobile = useMediaQuery(theme.breakpoints.down('md'));
+  	const isMobile = useMediaQuery(theme.breakpoints.down('md'));
 	const selected = useSelector(selectChain);
 
 	// const handleExt = () => {
@@ -70,6 +71,7 @@ function Body({api}) {
 
 			</Box>
 			<div style={{ backgroundColor: '#0B1317'}}>
+      {/* <div style={{ backgroundColor: '#FFF'}}> */}
 				<Container sx={{ py: 20 }} maxWidth="lg">
 					<Typography
 								variant="h3"
@@ -77,7 +79,7 @@ function Body({api}) {
 								align="left"
 								paragraph
 					>ONE-T Nomination Pools</Typography>
-					<Grid container spacing={4}>
+					<Grid container spacing={4} sx={{ mb: 4 }}>
 						<Grid item xs={12} sm={6}>
 							<PoolBox poolId={getNetworkPoolId(selected, 0)} api={api} />
 						</Grid>
@@ -85,6 +87,7 @@ function Body({api}) {
 							<PoolBox poolId={getNetworkPoolId(selected, 1)} api={api} extra="Validators with a lower commission (LC) are scored higher. " />
 						</Grid>
 					</Grid>
+					<PoolsBox api={api} />
 				</Container>
 			</div>
 			<Container sx={{ py: 20 }} maxWidth="lg">
@@ -158,7 +161,7 @@ function Body({api}) {
 							align="left"
 							paragraph
 							>
-							To finalize, there is inevitably a random factor - how many times a validator participates in the parachain consensus - being this a completely random factor, the weight of this category in the performance calculation is the lowest. But is still very important, because of the fact that the more assignments a validator has, the more chances one have to miss candidate backing votes. Having more p/v sessions is better and slithly increase the performance score.
+							To finalize, there is inevitably a random factor - how many times a validator participates in the parachain consensus - being this a completely random factor, the weight of this category in the performance calculation is the lowest. But is still very important, because of the fact that the more assignments a validator has, the more chances one have to miss candidate backing votes. Having more p/v sessions is better and slightly increase the performance score.
             </Typography>
             <Typography
 							variant="body1"
