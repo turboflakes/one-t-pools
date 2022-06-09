@@ -26,7 +26,7 @@ export const PoolBox = ({poolId, api, extra}) => {
     content = (
       <Card sx={{ height: '100%', borderRadius: '16px' }} elevation={0}>
           <CardContent sx={{ flexGrow: 1 }}>
-            <Box sx={{ padding: '0', minHeight: '224px', display: 'flex', flexDirection: 'column' }}>
+            <Box sx={{ padding: '0', minHeight: '244px', display: 'flex', flexDirection: 'column' }}>
               <Box sx={{ marginBottom: '16px', display: 'flex', flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
                 <Box sx={{}}>
                   <Typography variant="subtitle2">
@@ -41,9 +41,7 @@ export const PoolBox = ({poolId, api, extra}) => {
                 </CardActions>
               </Box>
               <Typography gutterBottom>
-              Nomination for ONE-T (Pool {poolId}) is based on the best TVP validators performances of the last {isSuccessLastNomination && !!lastNomination.sessions_counter ? lastNomination.sessions_counter : 'X'} sessions. {extra ? extra : ''}
-              </Typography>
-              <Typography>
+              The nomination for <i>Pool ID {poolId}</i> aims to run once a day. Is fully automated and strictly based on the best TVP validators performances of the last {isSuccessLastNomination && !!lastNomination.sessions_counter ? lastNomination.sessions_counter : 'X'} sessions. {extra ? <b>{extra}</b> : ''}
               {isSuccessNominees ? <span>Only the <b>Top {nominees.nominees.length}</b> are nominated for this pool.</span> : <b>Stay tuned. Nominations will be triggered soon :)</b>}
               </Typography>
             </Box>

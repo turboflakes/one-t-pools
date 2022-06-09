@@ -9,7 +9,6 @@ import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Link from '@mui/material/Link';
 import Button from '@mui/material/Button';
-import AddIcon from '@mui/icons-material/Add';
 // import IconButton from '@mui/material/IconButton';
 // import ArrowRightIcon from '@mui/icons-material/ArrowRight';
 import { PoolBox } from '../features/pools/PoolBox'
@@ -121,7 +120,7 @@ function Body({api}) {
 							<PoolBox poolId={getNetworkPoolId(selected, 0)} api={api} />
 						</Grid>
 						<Grid item xs={12} sm={6}>
-							<PoolBox poolId={getNetworkPoolId(selected, 1)} api={api} extra="Validators with a lower commission (LC) are scored higher. " />
+							<PoolBox poolId={getNetworkPoolId(selected, 1)} api={api} extra="Validators with the lowest commission (LC) are scored higher. " />
 						</Grid>
 					</Grid>
 					<PoolsBox api={api} />

@@ -59,16 +59,18 @@ export const NomineesBox = ({poolId}) => {
     return (
       <Box>
         <List
-          sx={{ width: '100%', bgcolor: 'background.paper' }}
+          sx={{ width: '100%', bgcolor: 'rgba(0, 0, 0, 0.08)', borderTopLeftRadius: 16, borderTopRightRadius: 16, borderBottomRightRadius: 16, borderBottomLeftRadius: 16}}
           component="nav">
-          <ListItemButton onClick={handleClick} disableRipple>
+          <ListItemButton onClick={handleClick} disableRipple sx={{ '&:hover': {
+            bgcolor: 'transparent'
+          }}}>
             <ListItemText primary={`Nominees (${data.nominees.length})`} />
             {open ? <ExpandLess /> : <ExpandMore />}
           </ListItemButton>
           <Collapse in={open} timeout="auto" unmountOnExit>
             <List component="div" disablePadding subheader={
             isSuccessLastNomination && !!lastNomination.block_number ? 
-              <ListSubheader variant="div" sx={{m: 0, color: "text.primary", textAlign: "right"}}>
+              <ListSubheader variant="div" sx={{m: 0, color: "text.primary", textAlign: "right", bgcolor: 'inherit'}}>
                 last nomination {moment.unix(lastNomination.ts).utc().format("DD/MM/YYYY")} finalized at block <Link href={`https://${selectedChain}.subscan.io/extrinsic/${lastNomination.extrinsic_hash}`}
                 target="_blank" rel="noreferrer" color="inherit" 
                 sx={{
@@ -81,7 +83,7 @@ export const NomineesBox = ({poolId}) => {
                 }}>#{lastNomination.block_number}</Link> 
               </ListSubheader> : null }>
               {!!data.nominees ? data.nominees.map((nominee, index) => 
-                <ListItem sx={{ pl: 4 }} key={index}
+                <ListItem sx={{ pl: 2 }} key={index}
                 secondaryAction={
                   <Box component="span" sx={{ display: 'flex', flexDirection: 'row'}}>
                     <IconButton aria-label="Polkadot{.js}"

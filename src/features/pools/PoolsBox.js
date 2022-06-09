@@ -158,7 +158,8 @@ export const PoolsBox = () => {
             <Box sx={{ height: '104px', width: '100%', position: 'absolute', top: '54px',
               '& .super-app-theme--row': {
                 backgroundColor: 'rgba(0, 0, 0, 0.08)',
-                fontWeight: 'bold'
+                fontWeight: 'bold',
+                fontSize: '0.925rem'
               }
               }}>
               <DataGrid
