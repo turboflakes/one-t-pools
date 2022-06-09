@@ -59,14 +59,14 @@ function Header({api}) {
 
   return (
 		<AppBar position="static" color="transparent" sx={{ bgcolor: "#FFF"}} elevation={0}>
-			<Toolbar sx={{ display: 'flex', justifyContent: 'flex-end', alignItems: 'center' }}>
+			<Toolbar sx={{ display: 'flex', justifyContent: 'flex-end', alignItems: 'center', mt: 1 }}>
 				<ToggleButtonGroup
 					// orientation="vertical"
 					value={selected}
 					exclusive
 					onChange={handleChainSelection}
 					aria-label="text alignment"
-					sx={{ display: 'flex', alignItems: 'center'	}}
+					sx={{ display: 'flex', alignItems: 'center', 	}}
 				>
 					{!!web3Account ? 
 						<Box sx={{ mr: 3, p: 1, mt: 1, display: 'flex', alignItems: 'center', bgcolor: 'background.secondary', borderRadius: 3}}>
@@ -75,24 +75,24 @@ function Header({api}) {
 								width: 26,
 								height: 26 }} alt={web3Account.meta.name}/>
 						</Box> : null}
-					<ToggleButton value="westend" aria-label="Westend Network" sx={{ mr: 1, border: 0, '&.Mui-selected' : {borderRadius: 16}, '&.MuiToggleButtonGroup-grouped:not(:last-of-type)': {borderRadius: 16}}}>
-						<img src={getNetworkIcon("westend")} style={{ 
-							width: 32,
-							height: 32 }} alt={"westend"}/>
-						{selected === "westend" ? <Typography variant='h5' sx={{ paddingLeft: '8px'}}>Westend</Typography> : null}
-					</ToggleButton>
-					<ToggleButton value="kusama" aria-label="Kusama Network" sx={{ mr: 1, border: 0, '&.Mui-selected' : {borderRadius: 16}, '&.MuiToggleButtonGroup-grouped:not(:last-of-type)': {borderRadius: 16}}}>
-						<img src={getNetworkIcon("kusama")}  style={{ 
-							width: 32,
-							height: 32 }} alt={"kusama"}/>
-						{selected === "kusama" ? <Typography variant='h5' sx={{ paddingLeft: '8px'}}>Kusama</Typography> : null}
-					</ToggleButton>
-					<ToggleButton value="polkadot" aria-label="Polkadot Network" disabled sx={{ border: 0, '&.Mui-disabled' : {border: 0}, '&.Mui-selected' : {borderRadius: 16}, '&.MuiToggleButtonGroup-grouped:not(:last-of-type)': {borderRadius: 16}}}>
+					<ToggleButton value="polkadot" aria-label="Polkadot Network" sx={{ mr: 1, border: 0, '&.Mui-selected' : {borderRadius: 16}, '&.MuiToggleButtonGroup-grouped:not(:last-of-type)': {borderRadius: 16}}}>
 						<img src={getNetworkIcon("polkadot")}  style={{ 
 							width: 32,
 							height: 32 }} alt={"polkadot"}/>
 						{selected === "polkadot" ? <Typography variant='h5' sx={{ paddingLeft: '8px'}}>Polkadot</Typography> : null}
 					</ToggleButton>
+					<ToggleButton value="kusama" aria-label="Kusama Network" sx={{ mr: 1, border: 0, '&.Mui-selected' : {borderRadius: 16}, '&.MuiToggleButtonGroup-grouped:not(:first-of-type)': {borderRadius: 16}}}>
+						<img src={getNetworkIcon("kusama")}  style={{ 
+							width: 32,
+							height: 32 }} alt={"kusama"}/>
+						{selected === "kusama" ? <Typography variant='h5' sx={{ paddingLeft: '8px'}}>Kusama</Typography> : null}
+					</ToggleButton>
+					{/* <ToggleButton value="westend" aria-label="Westend Network" sx={{ mr: 1, border: 0, '&.Mui-selected' : {borderRadius: 16}, '&.MuiToggleButtonGroup-grouped:not(:last-of-type)': {borderRadius: 16}}}>
+						<img src={getNetworkIcon("westend")} style={{ 
+							width: 32,
+							height: 32 }} alt={"westend"}/>
+						{selected === "westend" ? <Typography variant='h5' sx={{ paddingLeft: '8px'}}>Westend</Typography> : null}
+					</ToggleButton> */}
 				</ToggleButtonGroup>
 			</Toolbar>
 		</AppBar>
