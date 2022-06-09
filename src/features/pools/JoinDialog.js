@@ -365,7 +365,7 @@ export function JoinDialog({poolId, api}) {
 
   return (
     <div>
-      <Button variant="contained" size="large" sx={{minWidth: '128px'}} onClick={handleClickOpen}>
+      <Button variant="contained" size="large" sx={{minWidth: '128px', borderRadius: '16px'}} onClick={handleClickOpen}>
         <AddIcon sx={{ mr: 1}} /> {isMember ? 'Bond extra' : 'Join'}
       </Button>
       <BootstrapDialog
