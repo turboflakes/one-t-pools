@@ -133,7 +133,7 @@ export const PoolsBox = () => {
 								align="left"
 								paragraph
 					>{`ONE-T Nomination Pools with ${Math.round(onetAPR)}% APR`}</Typography>
-        <Typography color="textSecondary" sx={{maxWidth: '100%'}} paragraph>At the beginning of {getNetworkName(selectedChain)} era <i>{data.era}</i>, on average, all nomination pools show {Math.round(allAPR)}% APR. ONE-T nominees, on average, present <b>{Math.round(onetAPR)}% APR</b>.</Typography>
+        <Typography color="textSecondary" sx={{maxWidth: '100%'}} paragraph>At the beginning of {getNetworkName(selectedChain)} era <i>{data.era}</i>, all nomination pools present, on average, {Math.round(allAPR)}% APR. In comparison, the current set of nominees for ONE-T nomination pools present, on average, <b>{Math.round(onetAPR)}% APR</b>.</Typography>
         <Box sx={{ position: 'relative' }}>
           <Box sx={{ height: '628px', width: '100%',  
             '.MuiDataGrid-virtualScroller': {
