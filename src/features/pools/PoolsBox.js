@@ -65,7 +65,6 @@ export const PoolsBox = () => {
       {
         field: 'apr',
         headerName: 'APR (%)',
-        description: 'APR is the Annual Percentage Rate. The Nomination Pool APR is based on the average APR of all the current pool nominees for the last 4 eras in Polkadot and the last 8 eras in Kusama.',
         type: 'number',
         width: 128,
         disableColumnMenu: true 
@@ -126,14 +125,17 @@ export const PoolsBox = () => {
         .reduce((previousValue, currentValue) => previousValue + currentValue, 0) / (data.pools.length) : 0
     
     return (
-      <Box sx={{ mt: 8 }}>
+      <Box sx={{ mt: 8, width: '100%' }}>
         <Typography
 								variant="h3"
 								color="textSecondary"
 								align="left"
 								paragraph
-					>{`ONE-T with ${Math.round(onetAPR)}% APR vs Other Pools`}</Typography>
-        <Typography color="textSecondary" sx={{maxWidth: '100%'}} paragraph>At the present era - <i>{`${getNetworkName(selectedChain)} // ${data.era}`}</i> - the average APR for all nomination pools is {Math.round(allAPR)}%. In comparison, ONE-T nomination pools offer <b>{Math.round(onetAPR)}% APR</b>.</Typography>
+					>{`ONE-T Nomination Pools with ${Math.round(onetAPR)}% APR¹`}</Typography>
+        <Box sx={{ maxWidth: '85%' }}>
+          <Typography color="textSecondary" paragraph>On {`${getNetworkName(selectedChain)}`}, at the start of era {data.era} the average APR from all nomination pools is {Math.round(allAPR)}%. In comparison, ONE-T nomination pools presents <b>{Math.round(onetAPR)}% APR</b>.</Typography>
+          <Typography color="textSecondary" variant="body2" paragraph><i>¹ Annual percentage rate (APR) is the rate used to help you understand potential returns from your bonded stake. The Nomination Pool APR is based on the average APR of all the current pool nominees (validators) from the last 84 eras on {getNetworkName(selectedChain)}, minus the respective validators commission.</i></Typography>
+        </Box>
         <Box sx={{ position: 'relative' }}>
           <Box sx={{ height: '628px', width: '100%',  
             '.MuiDataGrid-virtualScroller': {
@@ -171,7 +173,7 @@ export const PoolsBox = () => {
               />
           </Box>
         </Box>
-        <Typography color="textSecondary" variant="caption" paragraph>last data sync and APR calculation {moment.unix(data.ts).utc().format("DD/MM/YYYY HH:mm:ss (UTC)")}</Typography>
+        <Typography color="textSecondary" variant="caption">last data sync and APR calculation {moment.unix(data.ts).utc().format("DD/MM/YYYY HH:mm:ss (UTC)")}</Typography>
       </Box>
     )
   }

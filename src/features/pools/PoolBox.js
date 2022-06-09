@@ -78,7 +78,7 @@ export const PoolBox = ({poolId, api, extra}) => {
                   <Typography variant='subtitle2'>
                     APR
                   </Typography>
-                  <Tooltip title="APR is the Annual Percentage Rate. The Nomination Pool APR is based on the average APR of all the current pool nominees for the last 4 eras in Polkadot and the last 8 eras in Kusama.">
+                  <Tooltip title={`Annual percentage rate (APR) is the rate used to help you understand potential returns from your bonded stake. The Nomination Pool APR is based on the average APR of all the current pool nominees (validators) from the last 84 eras on {getNetworkName(selectedChain)}, minus the respective validators commission.`}>
                     <InfoIcon fontSize="inherit" sx={{ml: 1}}/>
                   </Tooltip>
                 </Box>
