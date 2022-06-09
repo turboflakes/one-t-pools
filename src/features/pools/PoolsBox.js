@@ -131,9 +131,9 @@ export const PoolsBox = () => {
 								color="textSecondary"
 								align="left"
 								paragraph
-					>{`ONE-T Nomination Pools with ${Math.round(onetAPR)}% APR¹`}</Typography>
+					>{`ONE-T Nomination Pools with ${Math.round(onetAPR)}% APR`}</Typography>
         <Box sx={{ maxWidth: '85%' }}>
-          <Typography color="textSecondary" paragraph>On {`${getNetworkName(selectedChain)}`}, at the start of era {data.era} the average APR from all nomination pools is {Math.round(allAPR)}%. In comparison, ONE-T nomination pools presents <b>{Math.round(onetAPR)}% APR</b>.</Typography>
+          <Typography color="textSecondary" paragraph>Every era, ONE-T measure the average APR¹ from all nomination pools. On {`${getNetworkName(selectedChain)}`}, at the start of era {data.era} all nomination pools display {Math.round(allAPR)}% APR on average and ONE-T nomination pools presents you with <b>{Math.round(onetAPR)}% APR</b>.</Typography>
           <Typography color="textSecondary" variant="body2" paragraph><i>¹ Annual percentage rate (APR) is the rate used to help you understand potential returns from your bonded stake. The Nomination Pool APR is based on the average APR of all the current pool nominees (validators) from the last 84 eras on {getNetworkName(selectedChain)}, minus the respective validators commission.</i></Typography>
         </Box>
         <Box sx={{ position: 'relative' }}>
