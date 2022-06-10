@@ -55,7 +55,7 @@ function Body({api}) {
 						{/* <Box > */}
 							<img src={onet} style={isMobile ? {width: 128, height: 128, margin: `8px 0 32px 0` } : {width: 288, height: 288 }} alt={"logo"}/>
 						{/* </Box> */}
-						<Box>
+						<Box sx={ !isMobile ? {pl: 8} : {}}>
 							<Typography
 								component="h1"
 								variant="h2"
@@ -115,7 +115,14 @@ function Body({api}) {
 								align="left"
 								paragraph
 					>ONE-T Nomination Pools at {getNetworkName(selected)}</Typography>
-					<Grid container spacing={4} sx={{ mb: 4 }}>
+          <Typography
+								color="textSecondary"
+								align="left"
+								paragraph
+					>
+            ONE-T unbiased and automated selection of validators aims to help the shape of {getNetworkName(selected)} and bring a fully trusted and highly decentralised network, where <i>Performance</i> and <i>high APRs</i> are all that matters - creating a win-win situation for pool members and {getNetworkName(selected)}.
+          </Typography>
+          <Grid container spacing={4} sx={{ mb: 4 }}>
 						<Grid item xs={12} sm={6}>
 							<PoolBox poolId={getNetworkPoolId(selected, 0)} api={api} />
 						</Grid>
@@ -141,7 +148,7 @@ function Body({api}) {
 							align="left"
 							paragraph
             >
-            ONE-T is a validator-performance report <b>bot</b> for the <i>Polkadot</i> and <i>Kusama</i> networks with special focus on the <b>One T</b>housand validator programme (<Link href="https://wiki.polkadot.network/docs/thousand-validators" 
+            ONE-T is a validator-performance <b>bot</b> for the <i>Polkadot</i> and <i>Kusama</i> networks with special focus on the <b>One T</b>housand validator programme (<Link href="https://wiki.polkadot.network/docs/thousand-validators" 
 								target="_blank" rel="noreferrer" color="inherit" 
 								sx={{
 									textDecoration: "underline",
@@ -197,7 +204,7 @@ function Body({api}) {
 							align="left"
 							paragraph
 							>
-							To finalize, there is inevitably a random factor - how many times a validator participates in the parachain consensus - being this a completely random factor, the weight of this category in the performance calculation is the lowest. But is still very important, because of the fact that the more assignments a validator has, the more chances one have to miss candidate backing votes. Having more p/v sessions is better and slightly increase the performance score.
+							To finalize, there is inevitably a random factor - the amount of times a validator participates in the parachain consensus. Being this fact completely random, it has been given the lowest weight in the performance calculation score. But is still very important, because the more assignments a validator has, the more chances one have to miss candidate backing votes. Having more p/v sessions is better and slightly increase the performance score.
             </Typography>
             <Typography
 							variant="body1"
@@ -255,7 +262,7 @@ function Body({api}) {
 							align="left"
 							paragraph
 							>
-						With ONE-T performance score is easy to build a ranking and pick up the best validator performances from the last <i>X</i> sessions. Although this is not a guarantee that the best validators will remain on top of the ranking in subsequent sessions, most likely they are trusted and will continue to out perform. These are a very handy group of validators to select when choosing the validator candidates that help you earn higher staking rewards. And this is what ONE-T Nomination Pools is all about.
+						With ONE-T performance score is easy to build a ranking and pick up the best validator performances from the last <i>X</i> sessions. Although, this is not a guarantee that the best validators will remain on top of the ranking in subsequent sessions, most likely they are <b>trusted</b> and will continue to <b>outperform</b>. All things considered, when it's time to pick a new set of candidates, these are a very handy group of validators to select. And chances are, better APR and higher staking rewards. And this is what ONE-T Nomination Pools is all about.
 						</Typography>
 						<Typography
 							variant="body1"
@@ -271,7 +278,7 @@ function Body({api}) {
 							align="left"
 							paragraph
 							>
-						One more thing - performance is not only what nominators look for in their selection criteria. Validator commission takes a huge weight when is time to choose validators to nominate. And with this in mind, ONE-T also has a ranking of the top 8 best validators performances running on lower commission. This ranking is than used to pick the top validators (8 on Polkadot and 12 on Kusama) and nominate them into a specific nomination pool.
+						One more thing. Performance is not only what nominators look for in their selection criteria - Validator commission, takes a heavy weight here. And with this in mind, ONE-T also has a ranking of the top 8 best validators performances with the lowest commission. This ranking is than used to select the top validators (8 on Polkadot and 12 on Kusama) and nominate them into a specific nomination pool.
             </Typography>
 						<Typography
 							variant="body1"
@@ -279,7 +286,10 @@ function Body({api}) {
 							align="left"
 							paragraph
 							>
-						<b>Be a member and join ONE-T nomination pools. </b>
+						<b>Come on board, and help shape one of the visions of Web3 - a fully trusted, unbiased and highly decentralised network where <i>Performance</i> is all that matters - be a member and join ONE-T nomination pools.</b>
+            </Typography>
+            <Typography paragraph>
+              Not yet convinced? Lookup for ONE-T reports.
             </Typography>
 						<Typography
 							variant="h3"
