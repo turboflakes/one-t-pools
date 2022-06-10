@@ -120,7 +120,7 @@ export const Body = ({api}) => {
 								align="left"
 								paragraph
 					>
-            ONE-T automated and unbiased selection of validators aims to help to shape {getNetworkName(selected)} and bring a fully trusted and highly decentralised network, where <i>Performance</i> and <i>high APRs</i> are all that matters - creating a win-win situation for pool members and {getNetworkName(selected)}.
+            ONE-T automation, precisely and unbiased selection of validators aims to help to shape {getNetworkName(selected)} and bring a fully trusted and highly decentralised network, where <i>Performance</i> and <i>high APRs</i> are all that matters - creating a win-win situation for pool members and {getNetworkName(selected)}.
           </Typography>
           <Grid container spacing={4} sx={{ mb: 4 }}>
 						<Grid item xs={12} sm={6}>
@@ -286,7 +286,7 @@ export const Body = ({api}) => {
                 color="textSecondary"
                 align="left"
                 >
-              Come onboard, and help shape some of the visions of Web3 - <b>A fully trusted, unbiased and highly decentralised network</b>. Become a member by joining ONE-T nomination pools.
+              Come onboard and help shape some of the visions of Web3 - <b>A fully trusted, unbiased and highly decentralised network</b>. Become a member by joining ONE-T nomination pools.
               </Typography>
             </Box>
             <Typography paragraph>
