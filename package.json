@@ -1,6 +1,6 @@
 {
   "name": "one-t-pools",
-  "version": "0.1.4",
+  "version": "0.1.5",
   "homepage": "https://one-t.turboflakes.io",
   "private": true,
   "dependencies": {
