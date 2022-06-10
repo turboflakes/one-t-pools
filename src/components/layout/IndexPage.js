@@ -1,9 +1,13 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 import { ApiPromise, WsProvider } from '@polkadot/api';
-import Header from '../Header'
-import Body from '../Body'
+import Fab from '@mui/material/Fab';
+import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
+import { Header } from '../Header'
+import { Body } from '../Body'
+import { Footer } from '../Footer'
 import { Loading } from '../Loading'
+import { ScrollTop } from '../ScrollTop'
 import { getNetworkWSS } from '../../constants'
 import {
   selectChain,
@@ -27,7 +31,7 @@ function useWeb3Api(chain) {
   return [api];
 }
 
-export const IndexPage = () => {
+export const IndexPage = (props) => {
   const selectedChain = useSelector(selectChain);
   const [api] = useWeb3Api(selectedChain);
 
@@ -38,6 +42,12 @@ export const IndexPage = () => {
       <React.Fragment>
         <Header api={api} />
         <Body api={api} />
+        <Footer />
+        <ScrollTop {...props}>
+          <Fab size="small" aria-label="scroll back to top">
+            <KeyboardArrowUpIcon />
+          </Fab>
+        </ScrollTop>
       </React.Fragment>
     )
   }

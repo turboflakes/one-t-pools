@@ -22,7 +22,7 @@ import {
 } from '../features/chain/chainSlice';
 
 
-function Body({api}) {
+export const Body = ({api}) => {
 	const theme = useTheme();
   const history = useHistory()
 	const dispatch = useDispatch();
@@ -120,7 +120,7 @@ function Body({api}) {
 								align="left"
 								paragraph
 					>
-            ONE-T unbiased and automated selection of validators aims to help the shape of {getNetworkName(selected)} and bring a fully trusted and highly decentralised network, where <i>Performance</i> and <i>high APRs</i> are all that matters - creating a win-win situation for pool members and {getNetworkName(selected)}.
+            ONE-T automated and unbiased selection of validators aims to help to shape {getNetworkName(selected)} and bring a fully trusted and highly decentralised network, where <i>Performance</i> and <i>high APRs</i> are all that matters - creating a win-win situation for pool members and {getNetworkName(selected)}.
           </Typography>
           <Grid container spacing={4} sx={{ mb: 4 }}>
 						<Grid item xs={12} sm={6}>
@@ -280,14 +280,15 @@ function Body({api}) {
 							>
 						One more thing. Performance is not only what nominators look for in their selection criteria - Validator commission, takes a heavy weight here. And with this in mind, ONE-T also has a ranking of the top 8 best validators performances with the lowest commission. This ranking is than used to select the top validators (8 on Polkadot and 12 on Kusama) and nominate them into a specific nomination pool.
             </Typography>
-						<Typography
-							variant="body1"
-							color="textPrimary"
-							align="left"
-							paragraph
-							>
-						<b>Come on board, and help shape one of the visions of Web3 - a fully trusted, unbiased and highly decentralised network where <i>Performance</i> is all that matters - be a member and join ONE-T nomination pools.</b>
-            </Typography>
+            <Box sx={{ bgcolor: "primary.main", p: 2, mb: 2}}>
+              <Typography
+                variant="body1"
+                color="textSecondary"
+                align="left"
+                >
+              Come onboard, and help shape some of the visions of Web3 - <b>A fully trusted, unbiased and highly decentralised network</b>. Become a member by joining ONE-T nomination pools.
+              </Typography>
+            </Box>
             <Typography paragraph>
               Not yet convinced? Lookup for ONE-T reports.
             </Typography>
@@ -346,5 +347,3 @@ function Body({api}) {
 		</main>
   );
 }
-
-export default Body;

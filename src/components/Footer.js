@@ -10,7 +10,7 @@ import logo from '../assets/logo/logo_1_inverted_subtract_turboflakes_.svg';
 import twitterSVG from '../assets/twitter_white.svg';
 import githubSVG from '../assets/github_white.svg';
 
-const Footer = (props) => {
+export const Footer = (props) => {
 	
 	const handleTwitter = () => {
 		window.open('https://twitter.com/turboflakes', '_blank')
@@ -114,6 +114,3 @@ const Footer = (props) => {
 		)
 	
 }
-
-export default Footer;
-  

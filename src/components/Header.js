@@ -39,7 +39,7 @@ function useWeb3ChainInfo(api) {
   return [];
 }
 
-function Header({api}) {
+export const Header = ({api}) => {
 	const history = useHistory()
 	const dispatch = useDispatch();
 
@@ -59,7 +59,7 @@ function Header({api}) {
 
   return (
 		<AppBar position="static" color="transparent" sx={{ bgcolor: "#FFF"}} elevation={0}>
-			<Toolbar sx={{ display: 'flex', justifyContent: 'flex-end', alignItems: 'center', mt: 1 }}>
+			<Toolbar sx={{ display: 'flex', justifyContent: 'flex-end', alignItems: 'center', mt: 1 }} id="top-toolbar">
 				<ToggleButtonGroup
 					// orientation="vertical"
 					value={selected}
@@ -98,5 +98,3 @@ function Header({api}) {
 		</AppBar>
   );
 }
-
-export default Header;
