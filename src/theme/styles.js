@@ -27,26 +27,9 @@ let theme = createTheme({
       contrastText: '#FFFFFF',
     },
     semantics: {
-      red: {
-        100: "#F8d2c9",
-        200: "#F19883",
-        300: "#FF5833",
-      },
-      amber: {
-        100: "#FFF8E7",
-        200: "#FFE29D",
-        300: "#FFCF5C",
-      },
-      pink: {
-        100: "#FFEAF8",
-        200: "#FFCAEE",
-        300: "#FF8CDA",
-      },
-      green: {
-        100: "#D0F1DE",
-        200: "#8BDCAD",
-        300: "#00C48C",
-      }
+      red: "#F19883",
+      amber: "#FFE29D",
+      green: "#8BDCAD",
     },
     neutrals: {
       100: "#F1F1F0",

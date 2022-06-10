@@ -135,8 +135,8 @@ function useWeb3JoinPool(api, chain, account, tx, data, joinIntent) {
       return await web3FromSource(account.meta.source)
     }
 
-    if (api && chain && account && tx && data && joinIntent) {
-      
+    if (result.status === "Waiting" && api && chain && account && tx && data && joinIntent) {
+
         let ext;
         if (tx === "join") {
           ext = api.tx.nominationPools.join(data.amount, data.poolId);
@@ -218,7 +218,7 @@ function useWeb3JoinPool(api, chain, account, tx, data, joinIntent) {
         })
     }
 
-  }, [api, chain, account, tx, data, joinIntent]);
+  }, [api, chain, account, tx, data, joinIntent, result.status]);
 
 
   React.useEffect(() => {
@@ -359,8 +359,8 @@ export const JoinDialog = ({poolId, poolMetadata, api}) => {
   // If extrinsic failed return to previous step, if succeededs close dialog
   if (stepsCompleted && result.status === "Reset") {
     handleBack()
-  } else if (stepsCompleted && result.status === "Success") {
-    handleClose()
+  } else if (stepsCompleted && result.status === "Done") {
+    handleClose();
   }
 
   return (
@@ -372,7 +372,7 @@ export const JoinDialog = ({poolId, poolMetadata, api}) => {
         aria-labelledby="customized-dialog-title"
         open={open}
       >
-        <BootstrapDialogTitle id="customized-dialog-title" onClose={handleClose}>
+        <BootstrapDialogTitle id="customized-dialog-title" onClose={handleClose} >
           {isEnabled ? ( isMember && currentStep === 1 ? `Bond extra into pool` : steps[currentStep]) : 'Access to Polkadot{.js}'}
         </BootstrapDialogTitle>
         {isEnabled && currentStep > 0 ? 
@@ -410,7 +410,7 @@ export const JoinDialog = ({poolId, poolMetadata, api}) => {
                   </ListItem>
                 )}
               </List> : (currentStep === 1 ? 
-                <Box sx={{ pl: 4, pt: 1 }}>
+                <Box sx={{ pl: 3, pt: 1 }}>
                   <Typography variant="subtitle2" gutterBottom>
                     {isMember ? 
                       (<React.Fragment>The member account that is to bond extra into <b>Pool ID {poolId}</b>:</React.Fragment>) : 
@@ -467,7 +467,7 @@ export const JoinDialog = ({poolId, poolMetadata, api}) => {
                     />
                   </Box> : null}
                 </Box> : (currentStep === 2 ? 
-                  <Box sx={{ pl: 4, pt: 1 }}>
+                  <Box sx={{ pl: 3, pt: 1 }}>
                     {isMember ? 
                       <Box>
                         <Typography variant="caption">{`tx: nominationPools.bondExtra( extra: ${JSON.stringify(data)} )`}</Typography>
@@ -485,15 +485,29 @@ export const JoinDialog = ({poolId, poolMetadata, api}) => {
                       </Box> }
                   </Box> :
 
-                  <Box sx={{ pl: 4, pt: 1 }}>
+                  <Box sx={{ p: 3, pt: 1 }}>
                     {isMember ? 
                       <Typography variant="caption" gutterBottom>{`tx: nominationPools.bondExtra( extra: ${JSON.stringify(data)} )`}</Typography> : 
                       <Typography variant="caption" gutterBottom>{`tx: nominationPools.join(${amountInPlancks}, ${poolId})`}</Typography> 
                     }
-                    <Typography variant="h5" gutterBottom>{result.status}</Typography>
-                    {!!result.message ? <Typography variant='body2' gutterBottom>{result.message}</Typography> : null}
-                    {!!result.errorMessage ? <Typography variant='body2' color="primary.main" gutterBottom>Error: {result.errorMessage}</Typography> : null}
-                    
+                    <Box sx={
+                      result.status === "Success" ? 
+                        { bgcolor: "semantics.green", p: 1} : 
+                        (result.status === "Failed" ? { bgcolor: "semantics.red", p: 1} : {})}>
+                      <Typography variant="h5" gutterBottom>{result.status}</Typography>
+                      {!!result.message ? <Typography variant='body2' gutterBottom>{result.message}</Typography> : null}
+                      {!!result.url ? <Link href={result.url.href}
+                          target="_blank" rel="noreferrer" color="inherit" 
+                          sx={{
+                            textDecoration: "underline",
+                            textDecorationThickness: 2,
+                            '&:hover': {
+                              textDecorationThickness: 2,
+                              // textDecorationColor: 'primary.main',
+                            }
+                          }}>{result.url.extrinsic_hash}</Link>: null}
+                      {!!result.errorMessage ? <Typography variant='body2' gutterBottom>Error: {result.errorMessage}</Typography> : null}
+                    </Box>
                   </Box>)) }
           </DialogContent> : 
           <DialogContent>
