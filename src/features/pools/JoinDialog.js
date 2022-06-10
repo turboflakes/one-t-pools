@@ -264,7 +264,7 @@ function useWeb3PoolMembers(api, poolId, web3Account) {
   return [isMember];
 }
 
-export function JoinDialog({poolId, api}) {
+export const JoinDialog = ({poolId, poolMetadata, api}) => {
   
   const dispatch = useDispatch();
 	const web3Account = useSelector(selectAccount);
@@ -375,6 +375,12 @@ export function JoinDialog({poolId, api}) {
         <BootstrapDialogTitle id="customized-dialog-title" onClose={handleClose}>
           {isEnabled ? ( isMember && currentStep === 1 ? `Bond extra into pool` : steps[currentStep]) : 'Access to Polkadot{.js}'}
         </BootstrapDialogTitle>
+        {isEnabled && currentStep > 0 ? 
+            <Box sx={{ width: '100%', bgcolor: 'rgba(0, 0, 0, 0.08)', pt: 1, pb: 1, pl: 2}}>
+              <Typography variant="caption" component="div">
+                {poolMetadata}
+              </Typography>
+            </Box> : null}
         {isEnabled ?
           <DialogContent dividers sx={{width: 576, height: 360}}>
             {currentStep === 0 ? 
@@ -406,8 +412,11 @@ export function JoinDialog({poolId, api}) {
               </List> : (currentStep === 1 ? 
                 <Box sx={{ pl: 4, pt: 1 }}>
                   <Typography variant="subtitle2" gutterBottom>
-                    {isMember ? `The member account that is to bond extra into the ONE-T (Pool ${poolId}):` : `The account that is to join the ONE-T (Pool ${poolId}):`}
+                    {isMember ? 
+                      (<React.Fragment>The member account that is to bond extra into <b>Pool ID {poolId}</b>:</React.Fragment>) : 
+                      (<React.Fragment>The account that is to join the <b>Pool ID {poolId}</b>:</React.Fragment>)}
                   </Typography>
+                  
                   <Box display="flex" alignItems="center" sx={{ mb: 3}}>
                     <Identicon
                       value={web3Account.address}
@@ -432,6 +441,11 @@ export function JoinDialog({poolId, api}) {
                   <Box sx={{ maxWidth: 320 }}>
                     <Typography variant="subtitle2" gutterBottom>Additional free funds to bond:</Typography>
                     <TextField
+                      sx={{
+                        '> .MuiFormHelperText-root': {
+                          color: "secondary.main"
+                        }
+                      }}
                       autoFocus
                       fullWidth
                       margin="none"
@@ -457,13 +471,17 @@ export function JoinDialog({poolId, api}) {
                     {isMember ? 
                       <Box>
                         <Typography variant="caption">{`tx: nominationPools.bondExtra( extra: ${JSON.stringify(data)} )`}</Typography>
-                        <Typography variant="h5" gutterBottom>nominationPools.bondExtra(extra)</Typography>
-                        <Typography variant="subtitle2">Bond extra more funds from origin into the pool to which they already belong.</Typography>
+                        {/* <Typography variant="h5" gutterBottom>nominationPools.bondExtra(extra)</Typography> */}
+                        <Typography variant="h5">{fundsType === "FreeBalance" ? 
+                          (<React.Fragment>Bond extra {amount} {selectedChainInfo.tokenSymbol[0] } into pool ID {poolId}</React.Fragment>) : 
+                          (<React.Fragment>Bond your current pool rewards into the pool</React.Fragment>)}
+                        </Typography>
                       </Box> :
                       <Box>
                         <Typography variant="caption">{`tx: nominationPools.join(${amountInPlancks}, ${poolId})`}</Typography>
-                        <Typography variant="h5" gutterBottom>nominationPools.join(amount, poolId)</Typography>
-                        <Typography variant="subtitle2">Stake funds with a pool. The amount to bond is transferred from the member to the pools account and immediately increases the pools bond.</Typography>
+                        {/* <Typography variant="h5" gutterBottom>nominationPools.join(amount, poolId)</Typography> */}
+                        <Typography variant="h5" gutterBottom>Stake {amount} {selectedChainInfo.tokenSymbol[0] } with pool ID {poolId}</Typography>
+                        <Typography> The amount to bond is transferred from the member to the pools account and immediately increases the pools bond.</Typography>
                       </Box> }
                   </Box> :
 
@@ -498,7 +516,7 @@ export function JoinDialog({poolId, api}) {
             </Typography>
           </DialogContent>
           }
-          
+
           {isEnabled && currentStep < 3 ?
             <DialogActions sx={{ display: 'flex', justifyContent: 'space-between'}}>
               <Button autoFocus onClick={handleBack} size="large" color="secondary" disabled={currentStep === 0}>
@@ -506,7 +524,7 @@ export function JoinDialog({poolId, api}) {
               </Button>
               <Typography sx={{ position: 'absolute', left: 240}}>{`${currentStep + 1} / 3`}</Typography>
               <Button autoFocus onClick={handleNext} size="large" disabled={!["Waiting", "Failed"].includes(result.status)}>
-                { isMember && currentStep === 1 ? `+ Bond extra` : stepsActions[currentStep]}
+                { isMember && currentStep === 1 ? `Bond extra` : stepsActions[currentStep]}
               </Button>
             </DialogActions> : null }
       </BootstrapDialog>

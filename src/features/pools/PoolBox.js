@@ -37,7 +37,7 @@ export const PoolBox = ({poolId, api, extra}) => {
                   </Typography>
                 </Box>
                 <CardActions sx={{ alignItems: "center", justifyContent: "center"}}>
-                  <JoinDialog poolId={poolId} api={api} />
+                  <JoinDialog poolId={poolId} poolMetadata={pool.metadata} api={api} />
                 </CardActions>
               </Box>
               <Typography gutterBottom>
