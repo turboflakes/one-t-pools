@@ -84,54 +84,31 @@ export const Body = ({api}) => {
 
 			</Box>
 			<div style={{ backgroundColor: '#0B1317'}}>
-        {/* TODO - only temporary until nomination pols are not available at Polkadot */}
-      {selected === "polkadot" ? 
-      <Container sx={{ py: 20 }} maxWidth="lg">
-        <Typography
-              variant="h3"
-              color="textSecondary"
-              align="center"
-              paragraph
-        >ONE-T Nomination Pools are comming soon to Polkadot</Typography>
-        <Typography
-              variant="subtitle1"
-              color="textSecondary"
-              align="center"
-              paragraph
-        >Until then, stay tuned and join ONE-T Nomination Pools at Kusama</Typography>
-        <Box sx={{ width: '100%', display: 'flex', justifyContent: 'center'}}>
-          <Button variant="contained" color='secondary' size="large" sx={{minWidth: '128px', borderRadius: 16, border: 0, mt: 6, p: `16px 24px`}} onClick={handleClick}>
-            <img src={getNetworkIcon("kusama")}  style={{ 
-							width: 32,
-							height: 32 }} alt={"kusama"}/>
-            <Typography variant='h5' sx={{ paddingLeft: '8px'}}>Kusama</Typography>
-          </Button>
-        </Box>
-      </Container> : 
-				<Container sx={{ py: 20 }} maxWidth="lg">
-					<Typography
-								variant="h3"
-								color="textSecondary"
-								align="left"
-								paragraph
-					>ONE-T Nomination Pools at {getNetworkName(selected)}</Typography>
-          <Typography
-								color="textSecondary"
-								align="left"
-								paragraph
-					>
-            ONE-T automation, precisely and unbiased selection of validators aims to help to shape {getNetworkName(selected)} and bring a fully trusted and highly decentralised network, where <i>Performance</i> and <i>high APRs</i> are all that matters - creating a win-win situation for pool members and {getNetworkName(selected)}.
-          </Typography>
-          <Grid container spacing={4} sx={{ mb: 4 }}>
-						<Grid item xs={12} sm={6}>
-							<PoolBox poolId={getNetworkPoolId(selected, 0)} api={api} />
-						</Grid>
-						<Grid item xs={12} sm={6}>
-							<PoolBox poolId={getNetworkPoolId(selected, 1)} api={api} extra="Validators with the lowest commission (LC) are scored higher. " />
-						</Grid>
+      
+			<Container sx={{ py: 20 }} maxWidth="lg">
+				<Typography
+							variant="h3"
+							color="textSecondary"
+							align="left"
+							paragraph
+				>ONE-T Nomination Pools at {getNetworkName(selected)}</Typography>
+				<Typography
+							color="textSecondary"
+							align="left"
+							paragraph
+				>
+				ONE-T automation, precisely and unbiased selection of validators aims to help to shape {getNetworkName(selected)} and bring a fully trusted and highly decentralised network, where <i>Performance</i> and <i>high APRs</i> are all that matters - creating a win-win situation for pool members and {getNetworkName(selected)}.
+				</Typography>
+				<Grid container spacing={4} sx={{ mb: 4 }}>
+					<Grid item xs={12} sm={6}>
+						<PoolBox poolId={getNetworkPoolId(selected, 0)} api={api} />
 					</Grid>
-					<PoolsBox api={api} />
-				</Container>}
+					<Grid item xs={12} sm={6}>
+						<PoolBox poolId={getNetworkPoolId(selected, 1)} api={api} extra="Validators with the lowest commission (LC) are scored higher. " />
+					</Grid>
+				</Grid>
+				<PoolsBox api={api} />
+			</Container>
 			</div>
 			<Container sx={{ py: 20 }} maxWidth="lg">
 				<Grid container>

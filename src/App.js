@@ -28,7 +28,7 @@ function LayoutRoute({
         return (
           <Redirect
             to={{
-              pathname: "/kusama",
+              pathname: "/polkadot",
               state: { from: props.location }
             }}
           />  
@@ -43,7 +43,7 @@ function App() {
       <Router>
         <Switch>
           <LayoutRoute exact strict path="/:chainName" layout={LayoutPage} page={IndexPage} />
-          <Redirect to="/kusama" />
+          <Redirect to="/polkadot" />
         </Switch>
       </Router>
   );

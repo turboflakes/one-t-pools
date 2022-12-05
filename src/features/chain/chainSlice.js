@@ -9,9 +9,9 @@ const validateChain = () => {
     return chain
   }
   // set default
-  document.location.hash = '#/kusama';
+  document.location.hash = '#/polkadot';
   document.location.pathname = '/';
-  return 'kusama'
+  return 'polkadot'
 }
 
 const initialState = {

@@ -16,7 +16,7 @@ const networkSettings = {
     url: "https://polkadot.network",
     maxValidators: 16,
     maxHistoryEras: 4,
-    poolIds: [process.env.REACT_APP_POLKADOT_POOL_ID_1, process.env.REACT_APP_POLKADOT_POOL_ID_2]
+    poolIds: [process.env.REACT_APP_POLKADOT_POOL_ID_1]
   },
   kusama: {
     name: "Kusama",
