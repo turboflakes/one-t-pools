@@ -114,11 +114,14 @@ export const PoolsBox = () => {
         }, 
     };
 
-    const onetAPR = !!data.pools ? data.pools.filter(pool => 
+    const onetPools = !!data.pools ? data.pools.filter(pool => 
       ( pool.id === parseInt(getNetworkPoolId(selectedChain, 0)) || 
-        pool.id === parseInt(getNetworkPoolId(selectedChain, 1))))
-        .map(pool => !!pool.nominees ? Math.round(pool.nominees.apr * 10000)/100 : 0)
-        .reduce((previousValue, currentValue) => previousValue + currentValue, 0) / 2 : 0
+        pool.id === parseInt(getNetworkPoolId(selectedChain, 1)))) : [];
+
+    const onetAPR = onetPools.length > 0 ? 
+      onetPools
+      .map(pool => !!pool.nominees ? Math.round(pool.nominees.apr * 10000)/100 : 0)
+      .reduce((previousValue, currentValue) => previousValue + currentValue, 0) / onetPools.length : 0;
     
     
     const allAPR = !!data.pools ? data.pools.map(pool => !!pool.nominees ? Math.round(pool.nominees.apr * 10000)/100 : 0)
